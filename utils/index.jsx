@@ -1,23 +1,7 @@
-import crypto from "crypto";
-
 const capitalize = (s) => {
   if (typeof s !== "string") return "";
   return s.charAt(0).toUpperCase() + s.slice(1);
 };
-
-function encrypt(data, key) {
-  var cipher = crypto.createCipher("aes-256-cbc", key);
-  var crypted = cipher.update(data, "utf-8", "hex");
-  crypted += cipher.final("hex");
-  return crypted;
-}
-
-function decrypt(data, key) {
-  var decipher = crypto.createDecipher("aes-256-cbc", key);
-  var decrypted = decipher.update(data, "hex", "utf-8");
-  decrypted += decipher.final("utf-8");
-  return decrypted;
-}
 
 /* 
 
@@ -72,4 +56,4 @@ export const validateEmail = (email) => {
   return expression.test(String(email).toLowerCase());
 };
 
-export { capitalize, encrypt, decrypt, example, copy };
+export { capitalize, example, copy };

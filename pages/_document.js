@@ -14,7 +14,7 @@ class MyDocument extends Document {
             id="pagestyle"
             rel="stylesheet"
             type="text/css"
-            href="/rsuite-default.css"
+            href={"/rsuite-default.css"}
           />
         </Head>
         <body>
