@@ -1,32 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Toggle, Icon } from "rsuite";
 import dynamic from "next/dynamic";
+import Nav from "./Nav";
+import styled from "styled-components";
 
-const Layout = (props) => {
-  const [dark, setDark] = useState(true);
-
+const _Layout = ({ className, submit, previous, children }) => {
   useEffect(() => {
     if (window.localStorage.getItem("theme") === "dark") {
       document
         .getElementById("pagestyle")
         .setAttribute("href", "/rsuite-dark.css");
-      setDark(true);
     }
   }, []);
 
   return (
-    <Row
-      style={{
-        maxWidth: "100vw",
-        marginLeft: 16,
-        marginRight: 16,
-        marginBottom: 48,
-        marginTop: 16,
-      }}
-    >
+    <Row className={className}>
       <Toggle
-        defaultChecked={dark}
-        style={{ position: "absolute", right: "2vh", top: "2vh", zIndex: 999 }}
+        defaultChecked={window.localStorage.getItem("theme") === "dark"}
         onChange={(e) => {
           if (e) {
             document
@@ -43,16 +33,31 @@ const Layout = (props) => {
         checkedChildren={<Icon icon="sun-o" />}
         unCheckedChildren={<Icon icon="moon-o" />}
       />
-      {props.submit && props.submit}
-      {props.previous && props.previous}
+      <Nav />
+      {submit && submit}
+      {previous && previous}
       <Col xs={24} sm={24} md={8} lg={6} />
       <Col xs={24} sm={12} md={8} lg={12}>
-        {props.children}
+        {children}
       </Col>
       <Col xs={24} sm={12} md={8} lg={6} />
     </Row>
   );
 };
+
+const Layout = styled(_Layout)`
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  padding: 48px;
+
+  > :nth-child(1) {
+    position: absolute;
+    right: 24px;
+    top: 24px;
+    z-index: 999;
+  }
+`;
 
 export default dynamic(() => Promise.resolve(Layout), {
   ssr: false,

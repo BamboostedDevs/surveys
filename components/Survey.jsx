@@ -1,6 +1,7 @@
 import React from "react";
 import { Text, Number, Date, Choice } from "./Inputs";
 import { Form } from "rsuite";
+import Title from "./Title";
 
 const generateSurvey = (val, idx, state, updateInput) => {
   const types = [
@@ -44,7 +45,7 @@ const generateSurvey = (val, idx, state, updateInput) => {
 const Survey = ({ state, updateInput }) => {
   return (
     <>
-      <h1 style={{ marginBottom: "5vh" }}>{state.title || "No name"}</h1>
+      <Title>{state.title || "No name"}</Title>
       <Form fluid>
         {state.form.length > 0
           ? state.form.map((val, idx) =>

@@ -5,7 +5,7 @@ import { Form, Icon, Progress } from "rsuite";
 const { Line } = Progress;
 import InputChoice from "../components/InputChoice";
 import { Text, Name, Number, Date, Choice } from "../components/CreateInputs";
-import { encrypt, copy, validateEmail } from "../utils";
+import { copy, validateEmail } from "../utils";
 import Submit from "../components/Submit";
 import AddEmail from "../components/AddEmail";
 import Layout from "../components/Layout";
@@ -105,19 +105,8 @@ export default function Create() {
       </Add>
     </>,
     <>
-      <h3 style={{ marginBottom: "1vh" }}>The survey is ready!</h3>
-      <h5 style={{ marginBottom: "5vh" }}>Here is Your link:</h5>
-      <Link
-        onClick={() =>
-          copy(
-            "http://localhost:8000/survey/" +
-              encrypt(JSON.stringify(survey), "password")
-          )
-        }
-      >
-        {"http://localhost:8000/survey/" +
-          encrypt(JSON.stringify(survey), "password")}
-      </Link>
+      <h3 style={{ marginBottom: "1vh" }}>Your survey has been sent!</h3>
+      {JSON.stringify(survey)}
     </>,
   ];
 
@@ -155,10 +144,10 @@ export default function Create() {
             paddingRight: "2px",
           }}
           percent={
-            part === 0
+            !part
               ? 5 +
-                (survey.title.length > 1 && 20) +
-                (survey.form.length >= 1 && 25) +
+                (survey.title.length > 1 && 30) +
+                (survey.form.length >= 1 && 30) +
                 (survey.form.length >= 5 && 30)
               : 100
           }
