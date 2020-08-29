@@ -40,7 +40,7 @@ const Nav = styled(_Nav)`
 
   > :nth-child(2) {
     width: 1px;
-    background-color: rgb(127, 127, 127, 0.5);
+    background-color: rgba(127, 127, 127, 0.5);
     margin: 0 8px 0 8px;
   }
 `;

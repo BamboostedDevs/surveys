@@ -14,6 +14,8 @@ Property "type":
 
 const example = {
   title: "Example survey",
+  description:
+    "This is just a simple example survey showing all possible inputs.",
   form: [
     {
       question: "What is your email address?",

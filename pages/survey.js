@@ -18,21 +18,24 @@ function useSurveyData(survey) {
   return [state, setState, updateInput];
 }
 
-function Display() {
+function Display({ appContext }) {
   const router = useRouter();
   const { hash } = router.query;
   const [state, setState, updateInput] = useSurveyData(false);
 
   // pull data
   useEffect(() => {
-    hash === "example" ? setState(example) : setState(null);
+    hash === "Example survey" ? setState(example) : setState(null);
   }, []);
 
   // submit answer
   const submit = () => console.log(state);
 
   return (
-    <Layout submit={<Submit onClick={submit}>Submit</Submit>}>
+    <Layout
+      submit={<Submit onClick={submit}>Submit</Submit>}
+      setTheme={appContext.setTheme}
+    >
       {state ? (
         <Survey state={state} updateInput={updateInput} />
       ) : state === null ? (

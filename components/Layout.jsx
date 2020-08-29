@@ -4,13 +4,14 @@ import dynamic from "next/dynamic";
 import Nav from "./Nav";
 import styled from "styled-components";
 
-const _Layout = ({ className, submit, previous, children }) => {
+const _Layout = ({ className, submit, previous, children, setTheme }) => {
   useEffect(() => {
     if (window.localStorage.getItem("theme") === "dark") {
       document
         .getElementById("pagestyle")
         .setAttribute("href", "/rsuite-dark.css");
-    }
+      setTheme("dark");
+    } else setTheme("default");
   }, []);
 
   return (
@@ -23,11 +24,13 @@ const _Layout = ({ className, submit, previous, children }) => {
               .getElementById("pagestyle")
               .setAttribute("href", "/rsuite-dark.css");
             window.localStorage.setItem("theme", "dark");
+            setTheme("dark");
           } else {
             document
               .getElementById("pagestyle")
               .setAttribute("href", "/rsuite-default.css");
             window.localStorage.setItem("theme", "default");
+            setTheme("default");
           }
         }}
         checkedChildren={<Icon icon="sun-o" />}

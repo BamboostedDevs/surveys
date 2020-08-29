@@ -1,7 +1,5 @@
-import { useRouter } from "next/router";
-import dynamic from "next/dynamic";
 import Layout from "../components/Layout";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Title, { MinorTitle } from "../components/Title";
 import { Button, Input } from "rsuite";
 import styled from "styled-components";
@@ -22,12 +20,12 @@ const Container = styled.div`
 
 const loginStyle = { width: "30vw", marginTop: "5%" };
 
-function Login() {
+function Login({ appContext }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   return (
-    <Layout>
+    <Layout setTheme={appContext.setTheme}>
       <Title>Login/Register</Title>
       <Container>
         <div>

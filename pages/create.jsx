@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import dynamic from "next/dynamic";
 import { Form, Icon, Progress } from "rsuite";
 const { Line } = Progress;
 import InputChoice from "../components/InputChoice";
 import { Text, Name, Number, Date, Choice } from "../components/CreateInputs";
-import { copy, validateEmail } from "../utils";
 import Submit from "../components/Submit";
-import AddEmail from "../components/AddEmail";
 import Layout from "../components/Layout";
+import Description from "../components/CreateInputs/Description";
 
 const Add = styled.div`
   transition: color 0.25s, background-color 0.5s;
@@ -63,9 +61,13 @@ const Link = styled.div`
   }
 `;
 
-export default function Create() {
+export default function Create({ appContext }) {
   const [modal, setModal] = useState(false);
-  const [survey, updateSurvey] = useState({ title: "", form: [] });
+  const [survey, updateSurvey] = useState({
+    title: "",
+    description: "",
+    form: [],
+  });
   const [email, setEmail] = useState("");
   const [part, changePart] = useState(0);
 
@@ -98,6 +100,7 @@ export default function Create() {
   const parts = [
     <>
       <Name survey={survey} update={updateSurvey} />
+      <Description survey={survey} update={updateSurvey} />
       {survey.form.map((val, idx) => generateSurvey(val, idx, survey.form))}
       <Add onClick={() => setModal(true)}>
         <Icon icon="plus-square-o" />
@@ -132,6 +135,7 @@ export default function Create() {
         image: survey.image,
         email: survey.email,
       }}
+      setTheme={appContext.setTheme}
     >
       <Form fluid>
         <h1 style={{ marginBottom: "1vh" }}>

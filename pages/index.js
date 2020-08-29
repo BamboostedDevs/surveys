@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
 import Layout from "../components/Layout";
 import Title from "../components/Title";
+import SurveyListing from "../components/SurveyListing";
+import { example } from "../utils";
 
-export default function index() {
+export default function index({ appContext }) {
   const [surveys, setSurveys] = useState([]);
 
   useEffect(() => {
-    setSurveys(["example"]);
+    setSurveys([example, example, example, example, example]);
   }, []);
 
   return (
-    <Layout>
+    <Layout setTheme={appContext.setTheme}>
       <div style={{ display: "flex", flexFlow: "column nowrap" }}>
         <Title>Available surveys:</Title>
         {surveys.map((val, idx) => (
-          <Link key={idx} href={{ pathname: "/survey", query: { hash: val } }}>
-            <a>{val}</a>
-          </Link>
+          <SurveyListing theme={appContext.theme} val={val} idx={idx} />
         ))}
       </div>
     </Layout>
