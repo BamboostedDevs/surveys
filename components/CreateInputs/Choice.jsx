@@ -6,13 +6,28 @@ import {
   CheckboxGroup,
   FormGroup,
   ControlLabel,
-  Input,
   TagPicker,
 } from "rsuite";
 import Dropdown from "./Dropdown";
+import styled from "styled-components";
+
+const StyledInput = styled.input`
+  min-width: 2em;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  border: none;
+  background: transparent;
+  margin-bottom: 8px;
+
+  &:focus {
+    outline: none;
+  }
+`;
 
 const Choice = ({ survey, idx, update }) => {
-  const updateQuestion = (value) => {
+  const updateQuestion = (event) => {
+    event.persist();
+    const value = event.target.value;
     var payload = { ...survey };
     payload.form[idx].question = value;
     update(payload);
@@ -29,18 +44,18 @@ const Choice = ({ survey, idx, update }) => {
   };
   return (
     <FormGroup>
-      <Dropdown question={survey.form[idx].question} remove={remove}>
-        <FormGroup>
-          <ControlLabel>Question</ControlLabel>
-          <Input
-            size={"sm"}
-            placeholder={"Question"}
+      <Dropdown
+        remove={remove}
+        input={
+          <StyledInput
             value={survey.form[idx].question || ""}
             onChange={updateQuestion}
+            placeholder="Question missing"
           />
-        </FormGroup>
+        }
+      >
         <FormGroup>
-          <ControlLabel>Options</ControlLabel>
+          <ControlLabel style={{ fontSize: "0.8rem" }}>Options</ControlLabel>
           <TagPicker
             size={"sm"}
             style={{ width: "100%" }}
