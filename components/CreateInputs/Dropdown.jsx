@@ -30,22 +30,18 @@ export default function Dropdown({ date, children, remove, input }) {
           justifyContent: "space-between",
         }}
       >
-        {input}
-        <span
-          style={{
-            cursor: "pointer",
-          }}
-        >
+        <div onClick={() => setDropdown(true)}>{input}</div>
+        <span>
           {!date && (
             <Icon
               onClick={toggleDropdown}
-              style={{ marginRight: "16px" }}
+              style={{ marginRight: "16px", cursor: "pointer" }}
               icon={dropdown ? "angle-up" : "edit"}
             />
           )}
           <Icon
             onClick={remove}
-            style={{ marginRight: "4px" }}
+            style={{ marginRight: "4px", cursor: "pointer" }}
             icon={"trash-o"}
           />
         </span>

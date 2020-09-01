@@ -105,17 +105,17 @@ export default function InputChoice({ modal, setModal, addInput }) {
           id={3}
           selected={selected === 3}
           select={handleSelect}
-          width="15vw"
+          width="fit-content"
         >
-          <DatePicker style={{ width: "15vw" }} />
+          <DatePicker />
         </Box>
         <Box
           id={4}
           selected={selected === 4}
           select={handleSelect}
-          width="15vw"
+          width="fit-content"
         >
-          <CheckboxGroup>
+          <CheckboxGroup style={{ paddingRight: "8px" }}>
             {[<Checkbox key="0">Multiple choice</Checkbox>]}
           </CheckboxGroup>
         </Box>
@@ -123,9 +123,11 @@ export default function InputChoice({ modal, setModal, addInput }) {
           id={5}
           selected={selected === 5}
           select={handleSelect}
-          width="15vw"
+          width="fit-content"
         >
-          <RadioGroup>{[<Radio key="0">Choose one</Radio>]}</RadioGroup>
+          <RadioGroup style={{ paddingRight: "8px" }}>
+            {[<Radio key="0">Choose one</Radio>]}
+          </RadioGroup>
         </Box>
       </Modal.Body>
       {selected !== false && (
