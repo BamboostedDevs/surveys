@@ -2,6 +2,20 @@ import React from "react";
 import { Input, FormGroup, ControlLabel } from "rsuite";
 import Dropdown from "./Dropdown";
 import { capitalize } from "../../utils";
+import styled from "styled-components";
+
+const StyledInput = styled.input`
+  min-width: 2em;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  border: none;
+  background: transparent;
+  margin-bottom: 8px;
+
+  &:focus {
+    outline: none;
+  }
+`;
 
 const Text = ({ survey, idx, update, long }) => {
   const updateDescription = (value) => {
@@ -9,9 +23,10 @@ const Text = ({ survey, idx, update, long }) => {
     payload.form[idx].description = value;
     update(payload);
   };
-  const updateTitle = (value) => {
+  const updateTitle = (event) => {
+    event.persist();
     var payload = { ...survey };
-    payload.form[idx].title = value;
+    payload.form[idx].title = event.target.value;
     update(payload);
   };
   const remove = () => {
@@ -21,16 +36,16 @@ const Text = ({ survey, idx, update, long }) => {
   };
   return (
     <FormGroup>
-      <Dropdown question={survey.form[idx].title} remove={remove}>
-        <FormGroup>
-          <ControlLabel>Question</ControlLabel>
-          <Input
-            size={"sm"}
-            placeholder={"Question"}
+      <Dropdown
+        remove={remove}
+        input={
+          <StyledInput
+            placeholder="Question missing"
             value={survey.form[idx].title || ""}
             onChange={updateTitle}
           />
-        </FormGroup>
+        }
+      >
         <FormGroup>
           <ControlLabel>Placeholder</ControlLabel>
           <Input
@@ -41,6 +56,7 @@ const Text = ({ survey, idx, update, long }) => {
           />
         </FormGroup>
       </Dropdown>
+
       <Input
         size={"md"}
         placeholder={

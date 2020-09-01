@@ -1,7 +1,7 @@
 import Layout from "../components/Layout";
 import { useState } from "react";
 import Title, { MinorTitle } from "../components/Title";
-import { Button, Input } from "rsuite";
+import { Button, ButtonGroup, ButtonToolbar, Input } from "rsuite";
 import styled from "styled-components";
 import { validateEmail } from "../utils";
 import Axios from "axios";
@@ -20,11 +20,9 @@ const Container = styled.div`
 
   > :nth-child(3) {
     margin-top: 5%;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    > :nth-child(1) {
-      margin-right: 3vw;
+    max-width: 30vw;
+    @media only screen and (max-width: 768px) {
+      max-width: 42vw;
     }
   }
 `;
@@ -75,10 +73,9 @@ function Login({ appContext }) {
             }
           />
         </div>
-        <div>
+        <ButtonGroup justified>
           <Button
             disabled={!(validateEmail(email) && password.length > 7)}
-            size="lg"
             appearance="ghost"
             color="cyan"
             onClick={handleRegister}
@@ -87,12 +84,11 @@ function Login({ appContext }) {
           </Button>
           <Button
             disabled={!(validateEmail(email) && password.length > 7)}
-            size="lg"
             appearance="ghost"
           >
             Login
           </Button>
-        </div>
+        </ButtonGroup>
       </Container>
     </Layout>
   );

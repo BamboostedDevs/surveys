@@ -1,11 +1,26 @@
 import React from "react";
-import { Input, DatePicker, FormGroup, ControlLabel } from "rsuite";
+import { DatePicker, FormGroup } from "rsuite";
 import Dropdown from "./Dropdown";
+import styled from "styled-components";
+
+const StyledInput = styled.input`
+  min-width: 2em;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  border: none;
+  background: transparent;
+  margin-bottom: 8px;
+
+  &:focus {
+    outline: none;
+  }
+`;
 
 const Date = ({ survey, idx, update }) => {
-  const updateTitle = (value) => {
+  const updateTitle = (event) => {
+    event.persist();
     var payload = { ...survey };
-    payload.form[idx].title = value;
+    payload.form[idx].title = event.target.value;
     update(payload);
   };
   const remove = () => {
@@ -15,17 +30,17 @@ const Date = ({ survey, idx, update }) => {
   };
   return (
     <FormGroup>
-      <Dropdown question={survey.form[idx].title} remove={remove}>
-        <FormGroup>
-          <ControlLabel>Question</ControlLabel>
-          <Input
-            size={"sm"}
-            placeholder={"Question"}
+      <Dropdown
+        date
+        remove={remove}
+        input={
+          <StyledInput
+            placeholder="Question missing"
             value={survey.form[idx].title || ""}
             onChange={updateTitle}
           />
-        </FormGroup>
-      </Dropdown>
+        }
+      />
       <DatePicker />
     </FormGroup>
   );

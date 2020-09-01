@@ -34,7 +34,7 @@ export default function index({ appContext }) {
         <Title>Available surveys:</Title>
         <Scroll>
           {surveys.map((val, idx) => (
-            <SurveyListing theme={appContext.theme} val={val} idx={idx} />
+            <SurveyListing theme={appContext.theme} val={val} key={idx} />
           ))}
         </Scroll>
       </div>
