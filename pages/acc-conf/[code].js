@@ -5,27 +5,6 @@ import Layout from "../../components/Layout";
 import Axios from "axios";
 import { Alert } from "rsuite";
 
-const Container = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-  height: 30vh;
-  justify-content: space-around;
-  align-items: center;
-  padding-top: 5vh;
-
-  > div {
-    min-width: 30vw;
-  }
-
-  > :nth-child(3) {
-    margin-top: 5%;
-    max-width: 30vw;
-    @media only screen and (max-width: 768px) {
-      max-width: 42vw;
-    }
-  }
-`;
-
 function confirmation({ appContext }) {
   const router = useRouter();
   const { code } = router.query;
