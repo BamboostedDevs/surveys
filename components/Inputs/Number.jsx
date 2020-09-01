@@ -7,7 +7,7 @@ const Number = ({ props, idx, value, setValue }) => {
   };
   return (
     <FormGroup>
-      <ControlLabel>{props.question || "Question missing"}</ControlLabel>
+      <ControlLabel>{props.title || "Question missing"}</ControlLabel>
       <InputNumber value={value} onChange={handleChange} />
     </FormGroup>
   );

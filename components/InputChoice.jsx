@@ -56,24 +56,22 @@ export default function InputChoice({ modal, setModal, addInput }) {
   const handleSubmit = () => {
     const cases = [
       {
-        type: 0,
+        type: "text",
       },
       {
-        type: 0,
-        long: true,
+        type: "textArea",
       },
       {
-        type: 1,
+        type: "number",
       },
       {
-        type: 2,
+        type: "date",
       },
       {
-        type: 3,
-        multiple: true,
+        type: "multipleChoice",
       },
       {
-        type: 3,
+        type: "choice",
       },
     ];
     addInput(cases[selected]);

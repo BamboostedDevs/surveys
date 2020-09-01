@@ -8,14 +8,14 @@ import {
   ControlLabel,
 } from "rsuite";
 
-const Choice = ({ props, idx, value, setValue }) => {
+const Choice = ({ props, idx, value, setValue, multiple }) => {
   const handleChange = (value) => {
     setValue(idx, value);
   };
   return (
     <FormGroup>
-      <ControlLabel>{props.question || "Question missing"}</ControlLabel>
-      {props.multiple ? (
+      <ControlLabel>{props.title || "Question missing"}</ControlLabel>
+      {multiple ? (
         <CheckboxGroup onChange={handleChange}>
           {props.options
             ? props.options.map((val, idx) => (

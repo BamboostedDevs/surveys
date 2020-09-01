@@ -7,7 +7,7 @@ const Date = ({ props, idx, value, setValue }) => {
   };
   return (
     <FormGroup>
-      <ControlLabel>{props.question || "Question missing"}</ControlLabel>
+      <ControlLabel>{props.title || "Question missing"}</ControlLabel>
       <DatePicker value={value} onChange={handleChange} />
     </FormGroup>
   );

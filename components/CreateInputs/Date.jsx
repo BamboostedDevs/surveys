@@ -3,9 +3,9 @@ import { Input, DatePicker, FormGroup, ControlLabel } from "rsuite";
 import Dropdown from "./Dropdown";
 
 const Date = ({ survey, idx, update }) => {
-  const updateQuestion = (value) => {
+  const updateTitle = (value) => {
     var payload = { ...survey };
-    payload.form[idx].question = value;
+    payload.form[idx].title = value;
     update(payload);
   };
   const remove = () => {
@@ -15,14 +15,14 @@ const Date = ({ survey, idx, update }) => {
   };
   return (
     <FormGroup>
-      <Dropdown question={survey.form[idx].question} remove={remove}>
+      <Dropdown question={survey.form[idx].title} remove={remove}>
         <FormGroup>
           <ControlLabel>Question</ControlLabel>
           <Input
             size={"sm"}
             placeholder={"Question"}
-            value={survey.form[idx].question || ""}
-            onChange={updateQuestion}
+            value={survey.form[idx].title || ""}
+            onChange={updateTitle}
           />
         </FormGroup>
       </Dropdown>

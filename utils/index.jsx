@@ -8,7 +8,7 @@ const capitalize = (s) => {
 Example dictionary - single survey
 
 Property "type":
-    ["text", "number", "date", "choise"];
+    ["text","textArea", "number", "date", "choise", "multipleChoice"];
 
 */
 
@@ -18,32 +18,55 @@ const example = {
     "This is just a simple example survey showing all possible inputs.",
   form: [
     {
-      question: "What is your email address?",
-      type: 0,
-      placeholder: "email",
+      title: "What is your email address?",
+      type: "text",
+      description: "email",
     },
     {
-      question: "What do u like to do in your free time?",
-      type: 0,
-      long: true,
+      title: "What do u like to do in your free time?",
+      type: "textArea",
     },
     {
-      question: "Fav number?",
-      type: 1,
+      title: "Fav number?",
+      type: "number",
     },
     {
-      question: "Bday?",
-      type: 2,
+      title: "Bday?",
+      type: "date",
     },
     {
-      question: "Do u like fish?",
-      type: 3,
+      title: "Do u like fish?",
+      type: "choice",
       options: ["Yes", "No"],
     },
     {
-      question: "What do u like?",
-      type: 3,
-      multiple: true,
+      title: "What do u like?",
+      type: "multipleChoice",
+      options: ["Cars", "Sport", "Coffe", "Life"],
+    },
+    {
+      title: "What do u like?",
+      type: "multipleChoice",
+      options: ["Cars", "Sport", "Coffe", "Life"],
+    },
+    {
+      title: "What do u like?",
+      type: "multipleChoice",
+      options: ["Cars", "Sport", "Coffe", "Life"],
+    },
+    {
+      title: "What do u like?",
+      type: "multipleChoice",
+      options: ["Cars", "Sport", "Coffe", "Life"],
+    },
+    {
+      title: "What do u like?",
+      type: "multipleChoice",
+      options: ["Cars", "Sport", "Coffe", "Life"],
+    },
+    {
+      title: "What do u like?",
+      type: "multipleChoice",
       options: ["Cars", "Sport", "Coffe", "Life"],
     },
   ],

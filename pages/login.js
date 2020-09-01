@@ -4,6 +4,7 @@ import Title, { MinorTitle } from "../components/Title";
 import { Button, Input } from "rsuite";
 import styled from "styled-components";
 import { validateEmail } from "../utils";
+import Axios from "axios";
 
 const Container = styled.div`
   display: flex;
@@ -16,13 +17,29 @@ const Container = styled.div`
   > div {
     min-width: 30vw;
   }
-`;
 
-const loginStyle = { width: "30vw", marginTop: "5%" };
+  > :nth-child(3) {
+    margin-top: 5%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    > :nth-child(1) {
+      margin-right: 3vw;
+    }
+  }
+`;
 
 function Login({ appContext }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleRegister = async () => {
+    const response = await Axios("http://f92fbc6ee3fe.ngrok.io/users​/signup", {
+      email,
+      password,
+    });
+    console.log(response);
+  };
 
   return (
     <Layout setTheme={appContext.setTheme}>
@@ -58,14 +75,24 @@ function Login({ appContext }) {
             }
           />
         </div>
-        <Button
-          disabled={!(validateEmail(email) && password.length > 7)}
-          style={loginStyle}
-          size="lg"
-          appearance="ghost"
-        >
-          Login
-        </Button>
+        <div>
+          <Button
+            disabled={!(validateEmail(email) && password.length > 7)}
+            size="lg"
+            appearance="ghost"
+            color="cyan"
+            onClick={handleRegister}
+          >
+            Register
+          </Button>
+          <Button
+            disabled={!(validateEmail(email) && password.length > 7)}
+            size="lg"
+            appearance="ghost"
+          >
+            Login
+          </Button>
+        </div>
       </Container>
     </Layout>
   );

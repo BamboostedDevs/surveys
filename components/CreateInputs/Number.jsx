@@ -4,14 +4,14 @@ import Dropdown from "./Dropdown";
 import { capitalize } from "../../utils";
 
 const Number = ({ survey, idx, update }) => {
-  const updatePlaceholder = (value) => {
+  const updateDescription = (value) => {
     var payload = { ...survey };
-    payload.form[idx].placeholder = value;
+    payload.form[idx].description = value;
     update(payload);
   };
-  const updateQuestion = (value) => {
+  const updateTitle = (value) => {
     var payload = { ...survey };
-    payload.form[idx].question = value;
+    payload.form[idx].title = value;
     update(payload);
   };
   const remove = () => {
@@ -21,14 +21,14 @@ const Number = ({ survey, idx, update }) => {
   };
   return (
     <FormGroup>
-      <Dropdown question={survey.form[idx].question} remove={remove}>
+      <Dropdown question={survey.form[idx].title} remove={remove}>
         <FormGroup>
           <ControlLabel>Question</ControlLabel>
           <Input
             size={"sm"}
             placeholder={"Question"}
-            value={survey.form[idx].question || ""}
-            onChange={updateQuestion}
+            value={survey.form[idx].title || ""}
+            onChange={updateTitle}
           />
         </FormGroup>
         <FormGroup>
@@ -36,15 +36,15 @@ const Number = ({ survey, idx, update }) => {
           <Input
             size={"sm"}
             placeholder={"Placeholder"}
-            value={survey.form[idx].placeholder || ""}
-            onChange={updatePlaceholder}
+            value={survey.form[idx].description || ""}
+            onChange={updateDescription}
           />
         </FormGroup>
       </Dropdown>
       <InputNumber
         placeholder={
-          survey.form[idx].placeholder
-            ? capitalize(survey.form[idx].placeholder)
+          survey.form[idx].description
+            ? capitalize(survey.form[idx].description)
             : "Number"
         }
       />

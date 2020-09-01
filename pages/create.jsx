@@ -7,6 +7,8 @@ import { Text, Name, Number, Date, Choice } from "../components/CreateInputs";
 import Submit from "../components/Submit";
 import Layout from "../components/Layout";
 import Description from "../components/CreateInputs/Description";
+import Scroll from "../components/Scroll";
+import Axios from "axios";
 
 const Add = styled.div`
   transition: color 0.25s, background-color 0.5s;
@@ -79,8 +81,14 @@ export default function Create({ appContext }) {
     updateSurvey(_survey);
   };
 
-  const hanldeNext = () => {
-    part < 2 && changePart(part + 1);
+  const hanldeNext = async () => {
+    changePart(part + 1);
+    console.log(survey);
+    const response = await Axios.post(
+      "http://f92fbc6ee3fe.ngrok.io/surveys/create",
+      survey
+    );
+    console.log(response);
   };
 
   const handlePrevious = () => {
@@ -88,20 +96,44 @@ export default function Create({ appContext }) {
   };
 
   const generateSurvey = (val, idx) => {
-    const types = [
-      <Text key={idx} idx={idx} survey={survey} update={updateSurvey} />,
-      <Number key={idx} idx={idx} survey={survey} update={updateSurvey} />,
-      <Date key={idx} idx={idx} survey={survey} update={updateSurvey} />,
-      <Choice key={idx} idx={idx} survey={survey} update={updateSurvey} />,
-    ];
-    return types[val.type];
+    const types = {
+      text: <Text key={idx} idx={idx} survey={survey} update={updateSurvey} />,
+      textArea: (
+        <Text
+          key={idx}
+          idx={idx}
+          survey={survey}
+          update={updateSurvey}
+          long={true}
+        />
+      ),
+      number: (
+        <Number key={idx} idx={idx} survey={survey} update={updateSurvey} />
+      ),
+      date: <Date key={idx} idx={idx} survey={survey} update={updateSurvey} />,
+      choice: (
+        <Choice key={idx} idx={idx} survey={survey} update={updateSurvey} />
+      ),
+      multipleChoice: (
+        <Choice
+          key={idx}
+          idx={idx}
+          survey={survey}
+          update={updateSurvey}
+          multiple={true}
+        />
+      ),
+    };
+    return types[val.type] || <h3>Error</h3>;
   };
 
   const parts = [
     <>
-      <Name survey={survey} update={updateSurvey} />
-      <Description survey={survey} update={updateSurvey} />
-      {survey.form.map((val, idx) => generateSurvey(val, idx, survey.form))}
+      <Scroll>
+        <Name survey={survey} update={updateSurvey} />
+        <Description survey={survey} update={updateSurvey} />
+        {survey.form.map((val, idx) => generateSurvey(val, idx, survey.form))}
+      </Scroll>
       <Add onClick={() => setModal(true)}>
         <Icon icon="plus-square-o" />
         <span>Add a field</span>
@@ -109,7 +141,6 @@ export default function Create({ appContext }) {
     </>,
     <>
       <h3 style={{ marginBottom: "1vh" }}>Your survey has been sent!</h3>
-      {JSON.stringify(survey)}
     </>,
   ];
 

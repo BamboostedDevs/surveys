@@ -20,7 +20,8 @@ const _Submit = ({ next, previous, className, children, onClick }) => {
 };
 
 const Submit = styled(_Submit)`
-  position: absolute;
+  position: fixed;
+  z-index: 999;
   ${({ previous }) => (previous ? "left: 32px;" : "right: 32px;")}
   bottom: 32px;
   height: 7.5vh;
