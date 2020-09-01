@@ -70,10 +70,7 @@ export default function Create({ appContext }) {
     description: "",
     form: [],
   });
-  const [email, setEmail] = useState("");
   const [part, changePart] = useState(0);
-
-  useEffect(() => console.log(survey), [survey]);
 
   const addInput = (input) => {
     var _survey = { ...survey };
@@ -166,6 +163,7 @@ export default function Create({ appContext }) {
         email: survey.email,
       }}
       appContext={appContext}
+      title="Create a survey"
     >
       <Form fluid>
         <h1 style={{ marginBottom: "1vh" }}>

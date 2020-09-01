@@ -33,7 +33,7 @@ function confirmation({ appContext }) {
   }, []);
 
   return (
-    <Layout appContext={appContext}>
+    <Layout appContext={appContext} title="Confirm account">
       <h1 style={{ marginTop: "10vh" }}>Confirming...</h1>
     </Layout>
   );

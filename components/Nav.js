@@ -5,9 +5,8 @@ import React, { useEffect } from "react";
 import { Alert } from "rsuite";
 
 function _Nav({ className, session, setSession }) {
-  useEffect(() => console.log(session));
+  const router = useRouter();
 
-  const logout = () => console.log(logout);
   const handleClick = () => {
     if (session) {
       setSession(false);
@@ -15,7 +14,6 @@ function _Nav({ className, session, setSession }) {
       router.push("/");
     } else router.push("/login");
   };
-  const router = useRouter();
 
   return (
     <div className={className}>

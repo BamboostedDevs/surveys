@@ -22,7 +22,7 @@ export default function index({ appContext }) {
   }, []);
 
   return (
-    <Layout appContext={appContext}>
+    <Layout appContext={appContext} title="All surveys">
       <div style={{ display: "flex", flexFlow: "column nowrap" }}>
         <Title>Available surveys:</Title>
         <Scroll>

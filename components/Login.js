@@ -54,7 +54,6 @@ export default function Login({ fallback, appContext }) {
       password,
     })
       .then((resp) => {
-        console.log(resp);
         if (resp.data && resp.data.token) {
           Alert.success("Logged In");
           appContext.setSession(resp.data.token);

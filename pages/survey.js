@@ -50,6 +50,7 @@ function Display({ appContext }) {
     <Layout
       submit={<Submit onClick={submit}>Submit</Submit>}
       appContext={appContext}
+      title={state ? "Survey - " + state.title : "Survey"}
     >
       {login ? (
         <Login

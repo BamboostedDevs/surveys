@@ -22,7 +22,6 @@ const Name = ({ survey, update }) => {
   const updateName = (event) => {
     event.persist();
     const value = event.target.value;
-    console.log(value);
     var _survey = { ...survey };
     _survey.title = value;
     update(_survey);

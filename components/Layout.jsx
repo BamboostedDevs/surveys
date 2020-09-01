@@ -3,8 +3,16 @@ import { Row, Col, Toggle, Icon } from "rsuite";
 import dynamic from "next/dynamic";
 import Nav from "./Nav";
 import styled from "styled-components";
+import Head from "next/head";
 
-const _Layout = ({ className, submit, previous, children, appContext }) => {
+const _Layout = ({
+  className,
+  submit,
+  previous,
+  children,
+  appContext,
+  title,
+}) => {
   useEffect(() => {
     if (window.localStorage.getItem("theme") === "dark") {
       document
@@ -15,36 +23,41 @@ const _Layout = ({ className, submit, previous, children, appContext }) => {
   }, []);
 
   return (
-    <Row className={className}>
-      <Toggle
-        defaultChecked={window.localStorage.getItem("theme") === "dark"}
-        onChange={(e) => {
-          if (e) {
-            document
-              .getElementById("pagestyle")
-              .setAttribute("href", "/rsuite-dark.css");
-            window.localStorage.setItem("theme", "dark");
-            appContext.setTheme("dark");
-          } else {
-            document
-              .getElementById("pagestyle")
-              .setAttribute("href", "/rsuite-default.css");
-            window.localStorage.setItem("theme", "default");
-            appContext.setTheme("default");
-          }
-        }}
-        checkedChildren={<Icon icon="sun-o" />}
-        unCheckedChildren={<Icon icon="moon-o" />}
-      />
-      <Nav session={appContext.session} setSession={appContext.setSession} />
-      {submit && submit}
-      {previous && previous}
-      <Col xs={24} sm={24} md={8} lg={6} />
-      <Col xs={24} sm={12} md={8} lg={12}>
-        {children}
-      </Col>
-      <Col xs={24} sm={12} md={8} lg={6} />
-    </Row>
+    <>
+      <Head>
+        <title>{title || "Surveys"}</title>
+      </Head>
+      <Row className={className}>
+        <Toggle
+          defaultChecked={window.localStorage.getItem("theme") === "dark"}
+          onChange={(e) => {
+            if (e) {
+              document
+                .getElementById("pagestyle")
+                .setAttribute("href", "/rsuite-dark.css");
+              window.localStorage.setItem("theme", "dark");
+              appContext.setTheme("dark");
+            } else {
+              document
+                .getElementById("pagestyle")
+                .setAttribute("href", "/rsuite-default.css");
+              window.localStorage.setItem("theme", "default");
+              appContext.setTheme("default");
+            }
+          }}
+          checkedChildren={<Icon icon="sun-o" />}
+          unCheckedChildren={<Icon icon="moon-o" />}
+        />
+        <Nav session={appContext.session} setSession={appContext.setSession} />
+        {submit && submit}
+        {previous && previous}
+        <Col xs={24} sm={24} md={8} lg={6} />
+        <Col xs={24} sm={12} md={8} lg={12}>
+          {children}
+        </Col>
+        <Col xs={24} sm={12} md={8} lg={6} />
+      </Row>
+    </>
   );
 };
 

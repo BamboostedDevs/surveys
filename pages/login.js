@@ -6,7 +6,7 @@ function login({ appContext }) {
   const router = useRouter();
 
   return (
-    <Layout appContext={appContext}>
+    <Layout appContext={appContext} title="Login/Register">
       <Login fallback={() => router.push("/")} appContext={appContext} />
     </Layout>
   );

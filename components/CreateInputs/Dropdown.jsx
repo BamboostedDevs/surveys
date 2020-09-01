@@ -18,8 +18,6 @@ export default function Dropdown({ date, children, remove, input }) {
   const [dropdown, setDropdown] = useState(false);
   const toggleDropdown = (e) => {
     e.preventDefault();
-
-    console.log(e.target);
     setDropdown(!dropdown);
   };
   return (
