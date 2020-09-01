@@ -28,7 +28,7 @@ export default function Dropdown({ date, children, remove, input }) {
           justifyContent: "space-between",
         }}
       >
-        <div onClick={() => setDropdown(true)}>{input}</div>
+        <div onClick={() => !date && setDropdown(true)}>{input}</div>
         <span>
           {!date && (
             <Icon
