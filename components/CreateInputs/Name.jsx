@@ -1,27 +1,38 @@
 import React from "react";
-import { Input, FormGroup, ControlLabel } from "rsuite";
-import Dropdown from "./Dropdown";
+import styled from "styled-components";
+
+const StyledInput = styled.input`
+  min-width: 2em;
+  letter-spacing: 0.1em;
+  border: none;
+  background: transparent;
+  display: block;
+  font-size: 2rem;
+  margin-bottom: 5vh;
+  font-weight: bolder;
+  word-wrap: break-word;
+  word-break: break-all;
+
+  &:focus {
+    outline: none;
+  }
+`;
 
 const Name = ({ survey, update }) => {
-  const updateName = (value) => {
+  const updateName = (event) => {
+    event.persist();
+    const value = event.target.value;
+    console.log(value);
     var _survey = { ...survey };
     _survey.title = value;
     update(_survey);
   };
   return (
-    <FormGroup>
-      <Dropdown question={survey.title} name>
-        <FormGroup>
-          <ControlLabel>Name of the survey</ControlLabel>
-          <Input
-            size={"lg"}
-            placeholder={"Name"}
-            value={survey.title || ""}
-            onChange={updateName}
-          />
-        </FormGroup>
-      </Dropdown>
-    </FormGroup>
+    <StyledInput
+      value={survey.title || ""}
+      onChange={updateName}
+      placeholder="No Name"
+    />
   );
 };
 

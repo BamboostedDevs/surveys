@@ -13,7 +13,7 @@ import {
 } from "rsuite";
 import styled from "styled-components";
 
-const _Box = ({ className, select, children, id }) => {
+const _Box = ({ className, select, children, id, width }) => {
   return (
     <div className={className}>
       <div id={id} className="dimm" onClick={select} />
@@ -27,6 +27,7 @@ const Box = styled(_Box)`
   margin: 16px 0 16px 0;
   cursor: pointer;
   position: relative;
+  width: ${({ width }) => width || "auto"};
 
   ${({ selected }) =>
     selected
@@ -102,15 +103,30 @@ export default function InputChoice({ modal, setModal, addInput }) {
         <Box id={2} selected={selected === 2} select={handleSelect}>
           <InputNumber placeholder="Number" />
         </Box>
-        <Box id={3} selected={selected === 3} select={handleSelect}>
-          <DatePicker />
+        <Box
+          id={3}
+          selected={selected === 3}
+          select={handleSelect}
+          width="15vw"
+        >
+          <DatePicker style={{ width: "15vw" }} />
         </Box>
-        <Box id={4} selected={selected === 4} select={handleSelect}>
+        <Box
+          id={4}
+          selected={selected === 4}
+          select={handleSelect}
+          width="15vw"
+        >
           <CheckboxGroup>
             {[<Checkbox key="0">Multiple choice</Checkbox>]}
           </CheckboxGroup>
         </Box>
-        <Box id={5} selected={selected === 5} select={handleSelect}>
+        <Box
+          id={5}
+          selected={selected === 5}
+          select={handleSelect}
+          width="15vw"
+        >
           <RadioGroup>{[<Radio key="0">Choose one</Radio>]}</RadioGroup>
         </Box>
       </Modal.Body>

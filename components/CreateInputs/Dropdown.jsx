@@ -14,9 +14,12 @@ const Settings = styled.div`
   }
 `;
 
-export default function Dropdown({ question, children, name, remove }) {
+export default function Dropdown({ date, children, remove, input }) {
   const [dropdown, setDropdown] = useState(false);
-  const toggleDropdown = () => {
+  const toggleDropdown = (e) => {
+    e.preventDefault();
+
+    console.log(e.target);
     setDropdown(!dropdown);
   };
   return (
@@ -27,36 +30,24 @@ export default function Dropdown({ question, children, name, remove }) {
           justifyContent: "space-between",
         }}
       >
-        <span
-          onClick={toggleDropdown}
-          style={{
-            cursor: "text",
-          }}
-        >
-          {!dropdown &&
-            (name ? (
-              <h2 style={{ marginBottom: "5vh" }}>{question || "No name"}</h2>
-            ) : (
-              question || "Question missing"
-            ))}
-        </span>
+        {input}
         <span
           style={{
             cursor: "pointer",
           }}
         >
-          <Icon
-            onClick={toggleDropdown}
-            style={{ marginRight: name ? "4px" : "16px" }}
-            icon={dropdown ? "angle-up" : "edit"}
-          />
-          {!name && (
+          {!date && (
             <Icon
-              onClick={remove}
-              style={{ marginRight: "4px" }}
-              icon={"trash-o"}
+              onClick={toggleDropdown}
+              style={{ marginRight: "16px" }}
+              icon={dropdown ? "angle-up" : "edit"}
             />
           )}
+          <Icon
+            onClick={remove}
+            style={{ marginRight: "4px" }}
+            icon={"trash-o"}
+          />
         </span>
       </ControlLabel>
       {dropdown && (
@@ -71,13 +62,6 @@ export default function Dropdown({ question, children, name, remove }) {
           >
             {children}
           </Settings>
-          <ControlLabel>
-            {name ? (
-              <h2 style={{ marginBottom: "1vh" }}>{question || "No name"}</h2>
-            ) : (
-              question || "Question missing"
-            )}
-          </ControlLabel>
         </>
       )}
     </>
