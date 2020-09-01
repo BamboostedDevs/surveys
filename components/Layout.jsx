@@ -4,14 +4,14 @@ import dynamic from "next/dynamic";
 import Nav from "./Nav";
 import styled from "styled-components";
 
-const _Layout = ({ className, submit, previous, children, setTheme }) => {
+const _Layout = ({ className, submit, previous, children, appContext }) => {
   useEffect(() => {
     if (window.localStorage.getItem("theme") === "dark") {
       document
         .getElementById("pagestyle")
         .setAttribute("href", "/rsuite-dark.css");
-      setTheme("dark");
-    } else setTheme("default");
+      appContext.setTheme("dark");
+    } else appContext.setTheme("default");
   }, []);
 
   return (
@@ -24,19 +24,19 @@ const _Layout = ({ className, submit, previous, children, setTheme }) => {
               .getElementById("pagestyle")
               .setAttribute("href", "/rsuite-dark.css");
             window.localStorage.setItem("theme", "dark");
-            setTheme("dark");
+            appContext.setTheme("dark");
           } else {
             document
               .getElementById("pagestyle")
               .setAttribute("href", "/rsuite-default.css");
             window.localStorage.setItem("theme", "default");
-            setTheme("default");
+            appContext.setTheme("default");
           }
         }}
         checkedChildren={<Icon icon="sun-o" />}
         unCheckedChildren={<Icon icon="moon-o" />}
       />
-      <Nav />
+      <Nav session={appContext.session} setSession={appContext.setSession} />
       {submit && submit}
       {previous && previous}
       <Col xs={24} sm={24} md={8} lg={6} />

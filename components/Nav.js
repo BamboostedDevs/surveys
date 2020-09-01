@@ -1,13 +1,18 @@
 import styled from "styled-components";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import React, { useEffect } from "react";
+import { Alert } from "rsuite";
 
-import React from "react";
+function _Nav({ className, session, setSession }) {
+  useEffect(() => console.log(session));
 
-function _Nav({ className, page, login }) {
   const logout = () => console.log(logout);
   const handleClick = () => {
-    if (login) {
+    if (session) {
+      setSession(false);
+      Alert.info("Logged out");
+      router.push("/");
     } else router.push("/login");
   };
   const router = useRouter();
@@ -18,7 +23,7 @@ function _Nav({ className, page, login }) {
         <span>{router.pathname !== "/" ? "home" : "create"}</span>
       </Link>
       <span>&zwnj;</span>
-      <span onClick={handleClick}>{login ? "logout" : "login"}</span>
+      <span onClick={handleClick}>{session ? "logout" : "login"}</span>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Form, Icon, Progress } from "rsuite";
+import { Alert, Form, Icon, Progress } from "rsuite";
 const { Line } = Progress;
 import InputChoice from "../components/InputChoice";
 import { Text, Name, Number, Date, Choice } from "../components/CreateInputs";
@@ -83,12 +83,11 @@ export default function Create({ appContext }) {
 
   const hanldeNext = async () => {
     changePart(part + 1);
-    console.log(survey);
-    const response = await Axios.post(
-      "http://f92fbc6ee3fe.ngrok.io/surveys/create",
-      survey
-    );
-    console.log(response);
+    await Axios.post("http://922c6f4d90e6.ngrok.io/surveys/create", survey)
+      .then((resp) => {
+        console.log(resp);
+      })
+      .catch((e) => Alert.error("Error"));
   };
 
   const handlePrevious = () => {
@@ -166,7 +165,7 @@ export default function Create({ appContext }) {
         image: survey.image,
         email: survey.email,
       }}
-      setTheme={appContext.setTheme}
+      appContext={appContext}
     >
       <Form fluid>
         <h1 style={{ marginBottom: "1vh" }}>

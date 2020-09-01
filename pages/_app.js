@@ -1,12 +1,18 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 const AppContext = React.createContext();
 
 function AppProvider({ Component, pageProps }) {
   const [session, setSession] = useState(false);
   const [theme, setTheme] = useState("default");
+  const [surveys, setSurveys] = useState([]);
+
+  useEffect(() => console.log(session), [session]);
+
   return (
-    <AppContext.Provider value={{ session, setSession, theme, setTheme }}>
+    <AppContext.Provider
+      value={{ session, setSession, theme, setTheme, surveys, setSurveys }}
+    >
       <App Component={Component} pageProps={pageProps} />
     </AppContext.Provider>
   );
