@@ -81,7 +81,15 @@ function Login({ callback, appContext, anonymous }) {
             placeholder={"Email"}
             onChange={setEmail}
             type="email"
-            style={!validateEmail(email) ? { borderColor: "red" } : undefined}
+            style={
+              anonymous
+                ? !validateEmail(email)
+                  ? { borderColor: "red" }
+                  : undefined
+                : email && !validateEmail(email)
+                ? { borderColor: "red" }
+                : undefined
+            }
           />
         </div>
         <div>
