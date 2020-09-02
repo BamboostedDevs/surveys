@@ -26,7 +26,6 @@ const _Layout = ({
     <>
       <Head>
         <title>{title || "Ankiety"}</title>
-        <link rel="icon" href="/icon.svg"></link>
       </Head>
       <Row className={className}>
         <Toggle

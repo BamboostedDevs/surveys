@@ -16,6 +16,7 @@ class MyDocument extends Document {
             type="text/css"
             href={"/rsuite-default.css"}
           />
+          <link rel="icon" href="/favicon.svg" />
         </Head>
         <body>
           <Main />
