@@ -1,5 +1,12 @@
 import React from "react";
-import { Input, InputNumber, FormGroup, ControlLabel } from "rsuite";
+import {
+  Input,
+  InputNumber,
+  FormGroup,
+  ControlLabel,
+  Toggle,
+  Icon,
+} from "rsuite";
 import Dropdown from "./Dropdown";
 import { capitalize } from "../../utils";
 import styled from "styled-components";
@@ -29,6 +36,11 @@ const Number = ({ survey, idx, update }) => {
     payload.form[idx].title = event.target.value;
     update(payload);
   };
+  const calculate = (toggle) => {
+    var payload = { ...survey };
+    payload.form[idx].count = toggle;
+    update(payload);
+  };
   const remove = () => {
     var payload = { ...survey };
     payload.form.splice(idx, 1);
@@ -54,6 +66,17 @@ const Number = ({ survey, idx, update }) => {
             value={survey.form[idx].description || ""}
             onChange={updateDescription}
           />
+        </FormGroup>
+        <FormGroup>
+          <ControlLabel>
+            Dodać do kalkulacji?
+            <Toggle
+              onChange={(e) => calculate(e)}
+              style={{ marginLeft: "8px" }}
+              checkedChildren={<Icon icon="check" />}
+              unCheckedChildren={<Icon icon="close" />}
+            />
+          </ControlLabel>
         </FormGroup>
       </Dropdown>
       <InputNumber
