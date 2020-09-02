@@ -27,7 +27,7 @@ function Display({ appContext }) {
   const [login, setLogin] = useState(false);
 
   useEffect(() => {
-    appContext.surveys.map((val) => {
+    appContext.surveys.map((val, idx) => {
       if (val.title === hash) setState(val);
     });
   }, []);
@@ -42,6 +42,18 @@ function Display({ appContext }) {
   };
 
   const finish = async () => {
+    var inputs = {};
+    state.form.map((val) => {
+      if (val.answer) inputs[val.title] = val.answer;
+    });
+    const payload = {
+      id: state.id,
+      email: appContext.email,
+      inputs,
+    };
+    await Axios.post("http://b15ce041cdae.ngrok.io/surveys/answer", payload, {
+      headers: { authorization: appContext.session },
+    }).then((resp) => console.log(resp));
     Alert.success("Submitted");
     router.push("/");
   };

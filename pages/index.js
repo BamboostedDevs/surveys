@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Layout from "../components/Layout";
 import Title from "../components/Title";
 import SurveyListing from "../components/SurveyListing";
-import { example } from "../utils";
 import Scroll from "../components/Scroll";
 import Axios from "axios";
 import { Alert } from "rsuite";
@@ -10,10 +9,11 @@ import { Alert } from "rsuite";
 export default function index({ appContext }) {
   useEffect(() => {
     (async () => {
-      await Axios.get("http://922c6f4d90e6.ngrok.io/surveys/available")
+      await Axios.get("http://b15ce041cdae.ngrok.io/surveys/available")
         .then((resp) => {
-          if (resp.data) appContext.setSurveys([...resp.data, ...[example]]);
+          if (resp.data) appContext.setSurveys(resp.data);
           else Alert.error("Error");
+          console.log(resp.data);
         })
         .catch((e) => {
           Alert.error("Error");

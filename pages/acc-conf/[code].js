@@ -12,7 +12,7 @@ function confirmation({ appContext }) {
   useEffect(() => {
     (async () => {
       await Axios.get(
-        "http://922c6f4d90e6.ngrok.io/users/confirm-signup/" + code
+        "http://b15ce041cdae.ngrok.io/users/confirm-signup/" + code
       )
         .then((resp) => {
           if (resp.data && resp.data.token) {

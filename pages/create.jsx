@@ -80,7 +80,8 @@ export default function Create({ appContext }) {
 
   const hanldeNext = async () => {
     changePart(part + 1);
-    await Axios.post("http://922c6f4d90e6.ngrok.io/surveys/create", survey)
+    console.log(survey);
+    await Axios.post("http://b15ce041cdae.ngrok.io/surveys/create", survey)
       .then((resp) => {
         console.log(resp);
       })

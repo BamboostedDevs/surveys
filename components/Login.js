@@ -33,7 +33,7 @@ export default function Login({ fallback, appContext }) {
   const [password, setPassword] = useState("");
 
   const handleRegister = async () => {
-    await Axios.post("http://922c6f4d90e6.ngrok.io/users/signup/", {
+    await Axios.post("http://b15ce041cdae.ngrok.io/users/signup/", {
       email,
       password,
     })
@@ -49,13 +49,14 @@ export default function Login({ fallback, appContext }) {
   };
 
   const handleLogin = async () => {
-    await Axios.post("http://922c6f4d90e6.ngrok.io/users/signin/", {
+    await Axios.post("http://b15ce041cdae.ngrok.io/users/signin/", {
       email,
       password,
     })
       .then((resp) => {
         if (resp.data && resp.data.token) {
           Alert.success("Logged In");
+          appContext.setEmail(email);
           appContext.setSession(resp.data.token);
           fallback && fallback();
         } else {
