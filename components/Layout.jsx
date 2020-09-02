@@ -25,7 +25,7 @@ const _Layout = ({
   return (
     <>
       <Head>
-        <title>{title || "Surveys"}</title>
+        <title>{title || "Ankiety"}</title>
       </Head>
       <Row className={className}>
         <Toggle

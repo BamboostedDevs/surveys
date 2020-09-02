@@ -89,7 +89,7 @@ export default function InputChoice({ modal, setModal, addInput }) {
       }}
     >
       <Modal.Header>
-        <Modal.Title>Choose an input type</Modal.Title>
+        <Modal.Title>Wybierz typ inputu</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Box id={0} selected={selected === 0} select={handleSelect}>
@@ -116,7 +116,7 @@ export default function InputChoice({ modal, setModal, addInput }) {
           width="fit-content"
         >
           <CheckboxGroup style={{ paddingRight: "8px" }}>
-            {[<Checkbox key="0">Multiple choice</Checkbox>]}
+            {[<Checkbox key="0">Wybierz wiele</Checkbox>]}
           </CheckboxGroup>
         </Box>
         <Box
@@ -126,7 +126,7 @@ export default function InputChoice({ modal, setModal, addInput }) {
           width="fit-content"
         >
           <RadioGroup style={{ paddingRight: "8px" }}>
-            {[<Radio key="0">Choose one</Radio>]}
+            {[<Radio key="0">Wybierz jedno</Radio>]}
           </RadioGroup>
         </Box>
       </Modal.Body>

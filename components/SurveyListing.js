@@ -7,7 +7,7 @@ function SurveyListing({ val, idx, theme }) {
     <Link key={idx} href={{ pathname: "/survey", query: { hash: val.title } }}>
       <_SurveyListing theme={theme}>
         <div>{val.title}</div>
-        <div>Description: </div>
+        <div>Opis: </div>
         <div>{val.description}</div>
       </_SurveyListing>
     </Link>

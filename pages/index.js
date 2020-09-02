@@ -9,22 +9,22 @@ import { Alert } from "rsuite";
 export default function index({ appContext }) {
   useEffect(() => {
     (async () => {
-      await Axios.get("http://b15ce041cdae.ngrok.io/surveys/available")
+      await Axios.get("http://3e8801cc2549.ngrok.io/surveys/available")
         .then((resp) => {
           if (resp.data) appContext.setSurveys(resp.data);
-          else Alert.error("Error");
+          else Alert.error("Błąd");
           console.log(resp.data);
         })
         .catch((e) => {
-          Alert.error("Error");
+          Alert.error("Błąd");
         });
     })();
   }, []);
 
   return (
-    <Layout appContext={appContext} title="All surveys">
+    <Layout appContext={appContext} title="Lista ankiet">
       <div style={{ display: "flex", flexFlow: "column nowrap" }}>
-        <Title>Available surveys:</Title>
+        <Title>Dostępne ankiety:</Title>
         <Scroll>
           {appContext.surveys.map((val, idx) => (
             <SurveyListing theme={appContext.theme} val={val} key={idx} />

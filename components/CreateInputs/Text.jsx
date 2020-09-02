@@ -40,7 +40,7 @@ const Text = ({ survey, idx, update, long }) => {
         remove={remove}
         input={
           <StyledInput
-            placeholder="Question missing"
+            placeholder="Dodaj pytanie"
             value={survey.form[idx].title || ""}
             onChange={updateTitle}
           />
@@ -62,7 +62,7 @@ const Text = ({ survey, idx, update, long }) => {
         placeholder={
           survey.form[idx].description
             ? capitalize(survey.form[idx].description)
-            : "Text"
+            : "Tekst"
         }
         componentClass={long && "textarea"}
       />

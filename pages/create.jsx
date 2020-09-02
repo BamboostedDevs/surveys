@@ -81,11 +81,11 @@ export default function Create({ appContext }) {
   const hanldeNext = async () => {
     changePart(part + 1);
     console.log(survey);
-    await Axios.post("http://b15ce041cdae.ngrok.io/surveys/create", survey)
+    await Axios.post("http://3e8801cc2549.ngrok.io/surveys/create", survey)
       .then((resp) => {
         console.log(resp);
       })
-      .catch((e) => Alert.error("Error"));
+      .catch((e) => Alert.error("Błąd"));
   };
 
   const handlePrevious = () => {
@@ -133,11 +133,11 @@ export default function Create({ appContext }) {
       </Scroll>
       <Add onClick={() => setModal(true)}>
         <Icon icon="plus-square-o" />
-        <span>Add a field</span>
+        <span>Dodaj pole</span>
       </Add>
     </>,
     <>
-      <h3 style={{ marginBottom: "1vh" }}>Your survey has been sent!</h3>
+      <h3 style={{ marginBottom: "1vh" }}>Twoja ankieta została wysłana!</h3>
     </>,
   ];
 
@@ -146,14 +146,14 @@ export default function Create({ appContext }) {
       submit={
         part !== 1 && (
           <Submit onClick={hanldeNext} next>
-            Finish
+            Zakończ
           </Submit>
         )
       }
       previous={
         part !== 0 && (
           <Submit onClick={handlePrevious} previous>
-            Previous
+            Poprzedni
           </Submit>
         )
       }
@@ -164,11 +164,11 @@ export default function Create({ appContext }) {
         email: survey.email,
       }}
       appContext={appContext}
-      title="Create a survey"
+      title="Stwórz ankietę"
     >
       <Form fluid>
         <h1 style={{ marginBottom: "1vh" }}>
-          {part === 2 ? "Finished!" : "Survey Creator"}
+          {part === 2 ? "Zakończono!" : "Kreator ankiet"}
         </h1>
         <Line
           style={{

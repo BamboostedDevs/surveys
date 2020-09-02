@@ -14,7 +14,7 @@ const Choice = ({ props, idx, value, setValue, multiple }) => {
   };
   return (
     <FormGroup>
-      <ControlLabel>{props.title || "Question missing"}</ControlLabel>
+      <ControlLabel>{props.title || "Dodaj pytanie"}</ControlLabel>
       {multiple ? (
         <CheckboxGroup onChange={handleChange}>
           {props.options
@@ -23,7 +23,7 @@ const Choice = ({ props, idx, value, setValue, multiple }) => {
                   {val}
                 </Checkbox>
               ))
-            : [<p key="0">No choices</p>]}
+            : [<p key="0">Brak wyborów</p>]}
         </CheckboxGroup>
       ) : (
         <RadioGroup onChange={handleChange}>
@@ -33,7 +33,7 @@ const Choice = ({ props, idx, value, setValue, multiple }) => {
                   {val}
                 </Radio>
               ))
-            : [<p key="0">No choices</p>]}
+            : [<p key="0">Brak wyborów</p>]}
         </RadioGroup>
       )}
     </FormGroup>

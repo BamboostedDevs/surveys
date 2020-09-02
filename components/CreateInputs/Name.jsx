@@ -30,7 +30,7 @@ const Name = ({ survey, update }) => {
     <StyledInput
       value={survey.title || ""}
       onChange={updateName}
-      placeholder="No Name"
+      placeholder="Nazwij ankietę"
     />
   );
 };

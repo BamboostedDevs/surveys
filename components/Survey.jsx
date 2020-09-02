@@ -74,14 +74,14 @@ const generateSurvey = (val, idx, state, updateInput) => {
 const Survey = ({ state, updateInput }) => {
   return (
     <>
-      <Title>{state.title || "No name"}</Title>
+      <Title>{state.title || "Brak nazwy"}</Title>
       <Scroll>
         <Form fluid>
           {state.form.length > 0
             ? state.form.map((val, idx) =>
                 generateSurvey(val, idx, state, updateInput)
               )
-            : "No questions"}
+            : "Brak pytań"}
         </Form>
       </Scroll>
     </>

@@ -36,48 +36,55 @@ function Display({ appContext }) {
     if (appContext.session) {
       finish();
     } else {
-      Alert.info("Login first");
+      Alert.info("Wymagany jest adres email.");
       setLogin(true);
     }
   };
 
-  const finish = async () => {
+  const finish = async (email) => {
     var inputs = {};
     state.form.map((val) => {
       if (val.answer) inputs[val.title] = val.answer;
     });
     const payload = {
       id: state.id,
-      email: appContext.email,
+      email: email || appContext.email,
       inputs,
     };
-    await Axios.post("http://b15ce041cdae.ngrok.io/surveys/answer", payload, {
+    console.log(payload, appContext.session);
+    await Axios.post("http://3e8801cc2549.ngrok.io/surveys/answer", payload, {
       headers: { authorization: appContext.session },
-    }).then((resp) => console.log(resp));
-    Alert.success("Submitted");
+    })
+      .then((resp) => {
+        console.log(resp);
+        Alert.success("Wysłano!");
+      })
+      .catch((e) => Alert.error("Błąd"));
     router.push("/");
   };
 
   return (
     <Layout
-      submit={<Submit onClick={submit}>Submit</Submit>}
+      submit={<Submit onClick={submit}>Zatwierdź</Submit>}
       appContext={appContext}
-      title={state ? "Survey - " + state.title : "Survey"}
+      title={state ? "Ankieta - " + state.title : "Ankieta"}
     >
       {login ? (
         <Login
           appContext={appContext}
-          fallback={() => {
+          callback={() => {
             setLogin(false);
             finish();
+          }}
+          anonymous={(email) => {
+            setLogin(false);
+            finish(email);
           }}
         />
       ) : state ? (
         <Survey state={state} updateInput={updateInput} />
-      ) : state === null ? (
-        <div>Survey does not exist</div>
       ) : (
-        <div></div>
+        <h3>Ankieta nie istnieje</h3>
       )}
     </Layout>
   );

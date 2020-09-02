@@ -12,18 +12,17 @@ function confirmation({ appContext }) {
   useEffect(() => {
     (async () => {
       await Axios.get(
-        "http://3e8801cc2549.ngrok.io/users/confirm-signup/" + code
+        "http://3e8801cc2549.ngrok.io/surveys/confirm-answer/" + code
       )
         .then((resp) => {
-          if (resp.data && resp.data.token) {
-            Alert.success("Potwierdzono konto!");
-            Alert.success("Zalogowano");
-            appContext.setSession(resp.data.token);
-            router.push("/");
+          if (resp.data && resp.data.created) {
+            Alert.success("Potwierdzono ankietę!");
+            Alert.info("Przekierowanie za 3s");
+            setTimeout(() => router.push("/"), 3000);
           } else {
             Alert.error("Błąd");
+            router.push("/");
           }
-          router.push("/");
         })
         .catch((e) => {
           router.push("/");
@@ -33,8 +32,9 @@ function confirmation({ appContext }) {
   }, []);
 
   return (
-    <Layout appContext={appContext} title="Potwierdź konto">
-      <h1 style={{ marginTop: "10vh" }}>Potwierdzanie w toku...</h1>
+    <Layout appContext={appContext} title="Potwierdź odpowiedź">
+      <h1 style={{ marginTop: "10vh" }}>Dziękujemy!</h1>
+      <h5 style={{ marginTop: "16px" }}>Ankieta została wysłana.</h5>
     </Layout>
   );
 }

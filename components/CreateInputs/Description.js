@@ -11,10 +11,10 @@ const Description = ({ survey, update }) => {
   const styles = { marginBottom: "24px" };
   return (
     <FormGroup style={styles}>
-      <ControlLabel>Description of the survey</ControlLabel>
+      <ControlLabel>Opis ankiety</ControlLabel>
       <Input
         size={"lg"}
-        placeholder={"Description"}
+        placeholder={"Opis"}
         value={survey.description || ""}
         onChange={updateDescription}
         componentClass="textarea"

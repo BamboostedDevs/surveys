@@ -10,7 +10,7 @@ function _Nav({ className, session, setSession }) {
   const handleClick = () => {
     if (session) {
       setSession(false);
-      Alert.info("Logged out");
+      Alert.info("Wylogowano");
       router.push("/");
     } else router.push("/login");
   };

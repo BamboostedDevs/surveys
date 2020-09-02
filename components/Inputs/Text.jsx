@@ -8,11 +8,13 @@ const Text = ({ props, idx, value, setValue, size, long }) => {
   };
   return (
     <FormGroup>
-      <ControlLabel>{props.title || "Question missing"}</ControlLabel>
+      <ControlLabel>{props.title || "Dodaj pytanie"}</ControlLabel>
       <Input
         size={size || "md"}
         value={value}
-        placeholder={props.description ? capitalize(props.description) : "Text"}
+        placeholder={
+          props.description ? capitalize(props.description) : "Tekst"
+        }
         onChange={handleChange}
         componentClass={long && "textarea"}
       />

@@ -47,14 +47,14 @@ const Choice = ({ survey, idx, update, multiple }) => {
         remove={remove}
         input={
           <StyledInput
-            placeholder="Question missing"
+            placeholder="Dodaj pytanie"
             value={survey.form[idx].title || ""}
             onChange={updateTitle}
           />
         }
       >
         <FormGroup>
-          <ControlLabel style={{ fontSize: "0.8rem" }}>Options</ControlLabel>
+          <ControlLabel style={{ fontSize: "0.8rem" }}>Opcje</ControlLabel>
           <TagPicker
             size={"sm"}
             style={{ width: "100%" }}
@@ -81,7 +81,7 @@ const Choice = ({ survey, idx, update, multiple }) => {
                   {val}
                 </Checkbox>
               ))
-            : [<p key="0">No choices</p>]}
+            : [<p key="0">Brak wyborów</p>]}
         </CheckboxGroup>
       ) : (
         <RadioGroup>
@@ -91,7 +91,7 @@ const Choice = ({ survey, idx, update, multiple }) => {
                   {val}
                 </Radio>
               ))
-            : [<p key="0">No choices</p>]}
+            : [<p key="0">Brak wyborów</p>]}
         </RadioGroup>
       )}
     </FormGroup>

@@ -40,7 +40,7 @@ const Number = ({ survey, idx, update }) => {
         remove={remove}
         input={
           <StyledInput
-            placeholder="Question missing"
+            placeholder="Dodaj pytanie"
             value={survey.form[idx].title || ""}
             onChange={updateTitle}
           />
@@ -60,7 +60,7 @@ const Number = ({ survey, idx, update }) => {
         placeholder={
           survey.form[idx].description
             ? capitalize(survey.form[idx].description)
-            : "Number"
+            : "Numer"
         }
       />
     </FormGroup>

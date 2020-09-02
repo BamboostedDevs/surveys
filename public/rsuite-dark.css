@@ -14294,7 +14294,7 @@ textarea.rs-input {
 }
 textarea.rs-input {
   resize: none;
-  min-width: 300px;
+  min-width: 200px;
   min-height: 76px;
   max-width: 100%;
   max-height: 200px;

@@ -35,7 +35,7 @@ const Date = ({ survey, idx, update }) => {
         remove={remove}
         input={
           <StyledInput
-            placeholder="Question missing"
+            placeholder="Dodaj pytanie"
             value={survey.form[idx].title || ""}
             onChange={updateTitle}
           />
