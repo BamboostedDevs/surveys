@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Alert, Form, Icon, Progress } from "rsuite";
+import { Alert, AutoComplete, Form, Icon, Progress, TagGroup } from "rsuite";
 const { Line } = Progress;
 import InputChoice from "../components/InputChoice";
 import { Text, Name, Number, Date, Choice } from "../components/CreateInputs";
@@ -9,8 +9,10 @@ import Layout from "../components/Layout";
 import Description from "../components/CreateInputs/Description";
 import Scroll from "../components/Scroll";
 import Axios from "axios";
+import Equation from "../components/Equation";
 
 const Add = styled.div`
+  margin-bottom: 8px;
   transition: color 0.25s, background-color 0.5s;
   height: 5vh;
   border-radius: 16px;
@@ -65,6 +67,9 @@ const Link = styled.div`
 
 export default function Create({ appContext }) {
   const [modal, setModal] = useState(false);
+  const [equation, setEquation] = useState([]);
+  const [count, setCount] = useState([]);
+  const [error, setError] = useState(false);
   const [survey, updateSurvey] = useState({
     title: "",
     description: "",
@@ -72,24 +77,55 @@ export default function Create({ appContext }) {
   });
   const [part, changePart] = useState(0);
 
+  useEffect(() => {
+    survey.form.map(
+      (val) =>
+        val.count &&
+        setCount([
+          ...count,
+          {
+            label: val.title || "Brak pytania",
+            value: val.title || "Brak pytania",
+          },
+        ])
+    );
+  }, [survey]);
+
   const addInput = (input) => {
     var _survey = { ...survey };
     _survey.form.push(input);
     updateSurvey(_survey);
   };
 
-  const hanldeNext = async () => {
-    changePart(part + 1);
-    console.log(survey);
-    await Axios.post("http://3e8801cc2549.ngrok.io/surveys/create", survey)
-      .then((resp) => {
-        console.log(resp);
+  const hanldeNext = async (finish) => {
+    if (part + 1 === 2 || finish === true) {
+      changePart(2);
+      console.log({
+        ...survey,
+        equation,
+      });
+      await Axios.post("http://c53a8449e299.ngrok.io/surveys/create", {
+        ...survey,
+        equation,
       })
-      .catch((e) => Alert.error("Błąd"));
+        .then((resp) => {
+          Alert.success("Stworzono ankietę");
+          setError(false);
+        })
+        .catch((e) => {
+          Alert.error("Błąd");
+          setError(true);
+        });
+    } else if (count.length > 0) {
+      changePart(part + 1);
+    } else {
+      hanldeNext(true);
+    }
   };
 
   const handlePrevious = () => {
-    part > 0 && changePart(part - 1);
+    part > 0 && count.length > 0 ? changePart(part - 1) : changePart(0);
+    setError(false);
   };
 
   const generateSurvey = (val, idx) => {
@@ -126,7 +162,7 @@ export default function Create({ appContext }) {
 
   const parts = [
     <>
-      <Scroll>
+      <Scroll size="calc(100vh - 124px - 26px - 3vh - 5vh - 8px - 48px - 48px)">
         <Name survey={survey} update={updateSurvey} />
         <Description survey={survey} update={updateSurvey} />
         {survey.form.map((val, idx) => generateSurvey(val, idx, survey.form))}
@@ -136,6 +172,7 @@ export default function Create({ appContext }) {
         <span>Dodaj pole</span>
       </Add>
     </>,
+    <Equation {...{ equation, setEquation, count }} />,
     <>
       <h3 style={{ marginBottom: "1vh" }}>Twoja ankieta została wysłana!</h3>
     </>,
@@ -144,9 +181,9 @@ export default function Create({ appContext }) {
   return (
     <Layout
       submit={
-        part !== 1 && (
+        part !== 2 && (
           <Submit onClick={hanldeNext} next>
-            Zakończ
+            {(count.length < 1) | (part === 1) ? "Zakończ" : "Dalej"}
           </Submit>
         )
       }
@@ -168,7 +205,13 @@ export default function Create({ appContext }) {
     >
       <Form fluid>
         <h1 style={{ marginBottom: "1vh" }}>
-          {part === 2 ? "Zakończono!" : "Kreator ankiet"}
+          {error
+            ? "Błąd"
+            : part === 2
+            ? "Zakończono!"
+            : part
+            ? "Tworzenie równania"
+            : "Kreator ankiet"}
         </h1>
         <Line
           style={{
@@ -181,13 +224,15 @@ export default function Create({ appContext }) {
               ? 5 +
                 (survey.title.length > 1 && 30) +
                 (survey.form.length >= 1 && 30) +
-                (survey.form.length >= 5 && 30)
-              : 100
+                (survey.form.length >= 5 && 20)
+              : part === 2
+              ? 100
+              : 85
           }
-          status={part === 1 ? "success" : "active"}
-          showInfo={part === 1}
+          status={error ? "fail" : part === 2 ? "success" : "active"}
+          showInfo={part === 2}
         />
-        {parts[part]}
+        {!error ? parts[part] : <h3>Proszę wrócić do poprzedniego kroku</h3>}
         <InputChoice modal={modal} setModal={setModal} addInput={addInput} />
       </Form>
     </Layout>

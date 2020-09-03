@@ -12,7 +12,7 @@ function confirmation({ appContext }) {
   useEffect(() => {
     (async () => {
       await Axios.get(
-        "http://3e8801cc2549.ngrok.io/surveys/confirm-answer/" + code
+        "http://c53a8449e299.ngrok.io/surveys/confirm-answer/" + code
       )
         .then((resp) => {
           if (resp.data && resp.data.created) {

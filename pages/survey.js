@@ -51,10 +51,14 @@ function Display({ appContext }) {
       email: email || appContext.email,
       inputs,
     };
-    console.log(payload, appContext.session);
-    await Axios.post("http://3e8801cc2549.ngrok.io/surveys/answer", payload, {
-      headers: { authorization: appContext.session },
-    })
+    console.log(payload, appContext.session || undefined);
+    await Axios.post(
+      "http://c53a8449e299.ngrok.io/surveys/answer",
+      payload,
+      appContext.session && {
+        headers: { authorization: appContext.session },
+      }
+    )
       .then((resp) => {
         console.log(resp);
         Alert.success("Wysłano!");

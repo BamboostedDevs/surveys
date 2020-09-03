@@ -34,7 +34,7 @@ function Login({ callback, appContext, anonymous }) {
   const [password, setPassword] = useState("");
 
   const handleRegister = async () => {
-    await Axios.post("http://3e8801cc2549.ngrok.io/users/signup/", {
+    await Axios.post("http://c53a8449e299.ngrok.io/users/signup/", {
       email,
       password,
     })
@@ -50,7 +50,7 @@ function Login({ callback, appContext, anonymous }) {
   };
 
   const handleLogin = async () => {
-    await Axios.post("http://3e8801cc2549.ngrok.io/users/signin/", {
+    await Axios.post("http://c53a8449e299.ngrok.io/users/signin/", {
       email,
       password,
     })

@@ -8,9 +8,6 @@ const Scroll = styled.div`
   margin-right: -16px;
 
   margin-bottom: 24px;
-  ::-webkit-scrollbar {
-    width: 1px;
-  }
 `;
 
 export default Scroll;

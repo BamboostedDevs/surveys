@@ -1,14 +1,27 @@
 import React from "react";
 import styled from "styled-components";
 import Link from "next/link";
+import moment from "moment";
 
-function SurveyListing({ val, idx, theme }) {
+function SurveyListing({ val, idx, theme, sent }) {
   return (
     <Link key={idx} href={{ pathname: "/survey", query: { hash: val.title } }}>
       <_SurveyListing theme={theme}>
-        <div>{val.title}</div>
-        <div>Opis: </div>
-        <div>{val.description}</div>
+        <div>
+          <div className="title">{val.title}</div>
+          <div>Opis: </div>
+          <div className="dimm">{val.description}</div>
+        </div>
+        {sent && (
+          <div>
+            <div className="title">wysłano</div>
+            <div className="dimm">
+              {moment(sent * 1000)
+                .locale("pl")
+                .fromNow()}
+            </div>
+          </div>
+        )}
       </_SurveyListing>
     </Link>
   );
@@ -27,15 +40,28 @@ const _SurveyListing = styled.div`
   margin-bottom: 24px;
   cursor: pointer;
 
-  > :nth-child(1) {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+
+  .title {
     margin-bottom: 8px;
     font-size: 1.3em;
     font-weight: 600;
   }
 
-  > :nth-child(3) {
+  .dimm {
     margin-left: 8px;
     color: rgba(127, 127, 127, 0.8);
+  }
+
+  > :nth-child(1) {
+    max-width: 65%;
+  }
+
+  > :nth-child(2) {
+    text-align: right;
   }
 
   :hover {
