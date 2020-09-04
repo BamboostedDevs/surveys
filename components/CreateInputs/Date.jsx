@@ -2,14 +2,16 @@ import React from "react";
 import { DatePicker, FormGroup } from "rsuite";
 import Dropdown from "./Dropdown";
 import styled from "styled-components";
+import TextareaAutosize from "react-textarea-autosize";
 
-const StyledInput = styled.input`
+const StyledInput = styled(TextareaAutosize)`
   min-width: 2em;
   font-size: 0.85rem;
   letter-spacing: 0.1em;
   border: none;
   background: transparent;
   margin-bottom: 8px;
+  resize: none;
 
   &:focus {
     outline: none;
