@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import TextareaAutosize from "react-textarea-autosize";
 
-const StyledInput = styled.input`
+const StyledInput = styled(TextareaAutosize)`
   min-width: 2em;
   letter-spacing: 0.1em;
   border: none;
@@ -10,8 +11,7 @@ const StyledInput = styled.input`
   font-size: 2rem;
   margin-bottom: 5vh;
   font-weight: bolder;
-  word-wrap: break-word;
-  word-break: break-all;
+  resize: none;
 
   &:focus {
     outline: none;
@@ -19,10 +19,11 @@ const StyledInput = styled.input`
 `;
 
 const Name = ({ survey, update }) => {
+  const [Rows, setRows] = useState(1);
+
   const updateName = (event) => {
     event.persist();
     const value = event.target.value;
-    console.log(value);
     var _survey = { ...survey };
     _survey.title = value;
     update(_survey);
