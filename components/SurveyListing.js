@@ -2,28 +2,57 @@ import React from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import moment from "moment";
+import Axios from "axios";
+var fileDownload = require("js-file-download");
 
-function SurveyListing({ val, idx, theme, sent }) {
+function SurveyListing({ val, idx, theme, sent, appContext }) {
+  const handleClick = async () => {
+    appContext.role === 1 &&
+      (await Axios.get(
+        "http://192.168.1.109:9097/surveys/answered-csv/" + val.id,
+        {
+          headers: { authorization: appContext.session },
+        }
+      )
+        .then((resp) => {
+          if (resp.data) {
+            fileDownload(resp.data, (val.title || "survey") + ".csv");
+          }
+        })
+        .catch((e) => {
+          Alert.error("Błąd");
+        }));
+  };
+
   return (
-    <Link key={idx} href={{ pathname: "/survey", query: { hash: val.title } }}>
-      <_SurveyListing theme={theme}>
-        <div>
-          <div className="title">{val.title}</div>
-          <div>Opis: </div>
-          <div className="dimm">{val.description}</div>
-        </div>
-        {sent && (
+    <div onClick={handleClick}>
+      <Link
+        key={idx}
+        href={
+          appContext.role !== 1
+            ? { pathname: "/survey", query: { hash: val.title } }
+            : ""
+        }
+      >
+        <_SurveyListing theme={theme}>
           <div>
-            <div className="title">wysłano</div>
-            <div className="dimm">
-              {moment(sent * 1000)
-                .locale("pl")
-                .fromNow()}
-            </div>
+            <div className="title">{val.title}</div>
+            <div>Opis: </div>
+            <div className="dimm">{val.description}</div>
           </div>
-        )}
-      </_SurveyListing>
-    </Link>
+          {sent && (
+            <div>
+              <div className="title">wysłano</div>
+              <div className="dimm">
+                {moment(sent * 1000)
+                  .locale("pl")
+                  .fromNow()}
+              </div>
+            </div>
+          )}
+        </_SurveyListing>
+      </Link>
+    </div>
   );
 }
 

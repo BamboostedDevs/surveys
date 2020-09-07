@@ -11,9 +11,7 @@ function confirmation({ appContext }) {
 
   useEffect(() => {
     (async () => {
-      await Axios.get(
-        "http://c53a8449e299.ngrok.io/users/confirm-signup/" + code
-      )
+      await Axios.get("http://192.168.1.109:9097/users/confirm-signup/" + code)
         .then((resp) => {
           if (resp.data && resp.data.token) {
             Alert.success("Potwierdzono konto!");

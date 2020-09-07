@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import Title from "../components/Title";
 import SurveyListing from "../components/SurveyListing";
@@ -7,11 +7,17 @@ import Axios from "axios";
 import { Alert } from "rsuite";
 
 export default function index({ appContext }) {
+  const [answered, setAnswered] = useState({});
   useEffect(() => {
     (async () => {
-      await Axios.get("http://c53a8449e299.ngrok.io/surveys/available")
+      await Axios.get(
+        "http://192.168.1.109:9097/surveys/available",
+        appContext.role && {
+          headers: { authorization: appContext.session },
+        }
+      )
         .then((resp) => {
-          if (resp.data) appContext.setSurveys(resp.data);
+          if (resp.data) appContext.setSurveys(resp.data.reverse());
           else Alert.error("Błąd");
           console.log(resp.data);
         })
@@ -23,13 +29,20 @@ export default function index({ appContext }) {
 
   useEffect(() => {
     appContext.session &&
+      appContext.role !== 1 &&
       (async () => {
-        await Axios.get("http://c53a8449e299.ngrok.io/surveys/answered", {
+        await Axios.get("http://192.168.1.109:9097/surveys/answered", {
           headers: { authorization: appContext.session },
         })
           .then((resp) => {
-            if (resp.data) console.log(resp.data);
-            else Alert.error("Błąd");
+            if (resp.data) {
+              var newAnswered = {};
+              resp.data.map((val) => {
+                newAnswered[val.title] = val.answerTimestamp;
+              });
+              console.log(newAnswered);
+              setAnswered(newAnswered);
+            } else Alert.error("Błąd");
             console.log(resp.data);
           })
           .catch((e) => {
@@ -48,7 +61,8 @@ export default function index({ appContext }) {
               theme={appContext.theme}
               val={val}
               key={idx}
-              sent={!idx && 1599059467}
+              sent={answered[val.title]}
+              appContext={appContext}
             />
           ))}
         </Scroll>

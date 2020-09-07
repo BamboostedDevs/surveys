@@ -4,21 +4,25 @@ import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { Alert } from "rsuite";
 
-function _Nav({ className, session, setSession }) {
+function _Nav({ className, session, setSession, role }) {
   const router = useRouter();
+
+  useEffect(() => {
+    console.log(role);
+  }, [role]);
 
   const handleClick = () => {
     if (session) {
       setSession(false);
       Alert.info("Wylogowano");
-      router.push("/");
+      window.location.reload(false);
     } else router.push("/login");
   };
 
   return (
     <div className={className}>
-      <Link href={router.pathname !== "/" ? "/" : "/create"}>
-        <span>{router.pathname !== "/" ? "home" : "create"}</span>
+      <Link href={router.pathname === "/" && role === 1 ? "/create" : "/"}>
+        <span>{router.pathname === "/" && role === 1 ? "create" : "home"}</span>
       </Link>
       <span>&zwnj;</span>
       <span onClick={handleClick}>{session ? "logout" : "login"}</span>

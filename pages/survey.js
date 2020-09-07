@@ -48,12 +48,12 @@ function Display({ appContext }) {
     });
     const payload = {
       id: state.id,
-      email: email || appContext.email,
+      email: email || appContext.email || undefined,
       inputs,
     };
     console.log(payload, appContext.session || undefined);
     await Axios.post(
-      "http://c53a8449e299.ngrok.io/surveys/answer",
+      "http://192.168.1.109:9097/surveys/answer",
       payload,
       appContext.session && {
         headers: { authorization: appContext.session },

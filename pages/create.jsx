@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Alert, AutoComplete, Form, Icon, Progress, TagGroup } from "rsuite";
+import { Alert, Form, Icon, Progress } from "rsuite";
 const { Line } = Progress;
 import InputChoice from "../components/InputChoice";
 import { Text, Name, Number, Date, Choice } from "../components/CreateInputs";
@@ -69,6 +69,7 @@ export default function Create({ appContext }) {
   const [modal, setModal] = useState(false);
   const [equation, setEquation] = useState([]);
   const [count, setCount] = useState([]);
+  const [preCount, setPreCount] = useState(false);
   const [error, setError] = useState(false);
   const [survey, updateSurvey] = useState({
     title: "",
@@ -78,17 +79,7 @@ export default function Create({ appContext }) {
   const [part, changePart] = useState(0);
 
   useEffect(() => {
-    survey.form.map(
-      (val) =>
-        val.count &&
-        setCount([
-          ...count,
-          {
-            label: val.title || "Brak pytania",
-            value: val.title || "Brak pytania",
-          },
-        ])
-    );
+    survey.form.map((val) => val.count && setPreCount(true));
   }, [survey]);
 
   const addInput = (input) => {
@@ -104,7 +95,7 @@ export default function Create({ appContext }) {
         ...survey,
         equation,
       });
-      await Axios.post("http://c53a8449e299.ngrok.io/surveys/create", {
+      await Axios.post("http://192.168.1.109:9097/surveys/create", {
         ...survey,
         equation,
       })
@@ -116,7 +107,17 @@ export default function Create({ appContext }) {
           Alert.error("Błąd");
           setError(true);
         });
-    } else if (count.length > 0) {
+    } else if (preCount) {
+      console.log(survey);
+      const nextCount = survey.form.map((val) => {
+        if (val.count)
+          return {
+            label: val.title || "Brak pytania",
+            value: val.title || "Brak pytania",
+          };
+      });
+      console.log(nextCount);
+      setCount(nextCount);
       changePart(part + 1);
     } else {
       hanldeNext(true);
@@ -183,7 +184,7 @@ export default function Create({ appContext }) {
       submit={
         part !== 2 && (
           <Submit onClick={hanldeNext} next>
-            {(count.length < 1) | (part === 1) ? "Zakończ" : "Dalej"}
+            {!preCount | (part === 1) ? "Zakończ" : "Dalej"}
           </Submit>
         )
       }

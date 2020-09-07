@@ -48,7 +48,11 @@ const _Layout = ({
           checkedChildren={<Icon icon="sun-o" />}
           unCheckedChildren={<Icon icon="moon-o" />}
         />
-        <Nav session={appContext.session} setSession={appContext.setSession} />
+        <Nav
+          session={appContext.session}
+          setSession={appContext.setSession}
+          role={appContext.role}
+        />
         {submit && submit}
         {previous && previous}
         <Col xs={24} sm={24} md={8} lg={6} />
