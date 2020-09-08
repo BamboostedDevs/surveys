@@ -53,15 +53,17 @@ function Display({ appContext }) {
     };
     console.log(payload, appContext.session || undefined);
     await Axios.post(
-      "http://192.168.1.109:9097/surveys/answer",
+      "http://5b2fa7e471e3.ngrok.io/surveys/answer",
       payload,
       appContext.session && {
         headers: { authorization: appContext.session },
       }
     )
       .then((resp) => {
-        console.log(resp);
-        Alert.success("Wysłano!");
+        if (resp.data.created) {
+          Alert.success("Wysłano!");
+          Alert.info("Twój wynik to: " + resp.data.equationResult, 7000);
+        } else Alert.error("Błąd");
       })
       .catch((e) => Alert.error("Błąd"));
     router.push("/");

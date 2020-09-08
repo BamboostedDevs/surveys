@@ -90,23 +90,41 @@ export default function Create({ appContext }) {
 
   const hanldeNext = async (finish) => {
     if (part + 1 === 2 || finish === true) {
-      changePart(2);
-      console.log({
-        ...survey,
-        equation,
-      });
-      await Axios.post("http://192.168.1.109:9097/surveys/create", {
-        ...survey,
-        equation,
-      })
-        .then((resp) => {
-          Alert.success("Stworzono ankietę");
-          setError(false);
-        })
-        .catch((e) => {
-          Alert.error("Błąd");
-          setError(true);
+      if (survey.title && survey.description && survey.form.length) {
+        changePart(2);
+        console.log({
+          ...survey,
+          equation,
+          equationProps: count.map((val) => val.label),
         });
+        await Axios.post(
+          "http://5b2fa7e471e3.ngrok.io/surveys/create",
+          {
+            ...survey,
+            equation,
+            equationProps: count.map((val) => val.label),
+          },
+          {
+            headers: { authorization: appContext.session },
+          }
+        )
+          .then((resp) => {
+            Alert.success("Stworzono ankietę");
+            setError(false);
+          })
+          .catch((e) => {
+            Alert.error("Błąd");
+            setError(true);
+          });
+      } else {
+        Alert.info(
+          !survey.title
+            ? "Proszę nadać nazwę ankiecie"
+            : !survey.description
+            ? "Proszę podać opis ankiety"
+            : "Ankieta musi posiadać min jedno pole"
+        );
+      }
     } else if (preCount) {
       console.log(survey);
       const nextCount = survey.form.map((val) => {
@@ -116,8 +134,7 @@ export default function Create({ appContext }) {
             value: val.title || "Brak pytania",
           };
       });
-      console.log(nextCount);
-      setCount(nextCount);
+      setCount(nextCount.filter((val) => val));
       changePart(part + 1);
     } else {
       hanldeNext(true);

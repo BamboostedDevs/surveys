@@ -34,7 +34,7 @@ function Login({ callback, appContext, anonymous }) {
   const [password, setPassword] = useState("");
 
   const handleRegister = async () => {
-    await Axios.post("http://192.168.1.109:9097/users/signup/", {
+    await Axios.post("http://5b2fa7e471e3.ngrok.io/users/signup/", {
       email,
       password,
     })
@@ -50,7 +50,7 @@ function Login({ callback, appContext, anonymous }) {
   };
 
   const handleLogin = async () => {
-    await Axios.post("http://192.168.1.109:9097/users/signin/", {
+    await Axios.post("http://5b2fa7e471e3.ngrok.io/users/signin/", {
       email,
       password,
     })

@@ -11,7 +11,7 @@ export default function index({ appContext }) {
   useEffect(() => {
     (async () => {
       await Axios.get(
-        "http://192.168.1.109:9097/surveys/available",
+        "http://5b2fa7e471e3.ngrok.io/surveys/available",
         appContext.role && {
           headers: { authorization: appContext.session },
         }
@@ -31,7 +31,7 @@ export default function index({ appContext }) {
     appContext.session &&
       appContext.role !== 1 &&
       (async () => {
-        await Axios.get("http://192.168.1.109:9097/surveys/answered", {
+        await Axios.get("http://5b2fa7e471e3.ngrok.io/surveys/answered", {
           headers: { authorization: appContext.session },
         })
           .then((resp) => {

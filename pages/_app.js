@@ -11,8 +11,13 @@ function AppProvider({ Component, pageProps }) {
   const [role, setRole] = useState(0);
 
   useEffect(() => {
-    session && setRole(parseJwt(session).role || 0);
-    console.log(session, role);
+    const _session = window.sessionStorage.getItem("session");
+    if (_session) setSession(_session);
+    if (session) {
+      setRole(parseJwt(session).role || 0);
+      window.sessionStorage.setItem("session", session);
+    }
+    console.log(_session, session, role);
   }, [session]);
 
   return (

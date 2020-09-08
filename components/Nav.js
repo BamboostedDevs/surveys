@@ -1,20 +1,17 @@
 import styled from "styled-components";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React from "react";
 import { Alert } from "rsuite";
 
 function _Nav({ className, session, setSession, role }) {
   const router = useRouter();
 
-  useEffect(() => {
-    console.log(role);
-  }, [role]);
-
   const handleClick = () => {
     if (session) {
       setSession(false);
       Alert.info("Wylogowano");
+      window.sessionStorage.removeItem("session");
       window.location.reload(false);
     } else router.push("/login");
   };

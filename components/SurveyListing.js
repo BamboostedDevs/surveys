@@ -3,13 +3,14 @@ import styled from "styled-components";
 import Link from "next/link";
 import moment from "moment";
 import Axios from "axios";
+import { Alert } from "rsuite";
 var fileDownload = require("js-file-download");
 
 function SurveyListing({ val, idx, theme, sent, appContext }) {
   const handleClick = async () => {
     appContext.role === 1 &&
       (await Axios.get(
-        "http://192.168.1.109:9097/surveys/answered-csv/" + val.id,
+        "http://5b2fa7e471e3.ngrok.io/surveys/answered-csv/" + val.id,
         {
           headers: { authorization: appContext.session },
         }
