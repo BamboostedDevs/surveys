@@ -46,25 +46,6 @@ const Add = styled.div`
   }
 `;
 
-const Link = styled.div`
-  transition: color 0.25s;
-  margin-bottom: 5vh;
-  word-break: break-all;
-  cursor: pointer;
-  overflow-y: scroll;
-  font-size: 1.25em;
-  max-height: 25vh;
-
-  :hover {
-    color: #1675e0;
-  }
-
-  :active {
-    transition: color 0.25s;
-    color: #000000;
-  }
-`;
-
 export default function Create({ appContext }) {
   const [modal, setModal] = useState(false);
   const [equation, setEquation] = useState([]);

@@ -4,6 +4,7 @@ import TextareaAutosize from "react-textarea-autosize";
 
 const StyledInput = styled(TextareaAutosize)`
   min-width: 2em;
+  max-width: calc(100% - 8px);
   letter-spacing: 0.1em;
   border: none;
   background: transparent;
@@ -19,8 +20,6 @@ const StyledInput = styled(TextareaAutosize)`
 `;
 
 const Name = ({ survey, update }) => {
-  const [Rows, setRows] = useState(1);
-
   const updateName = (event) => {
     event.persist();
     const value = event.target.value;

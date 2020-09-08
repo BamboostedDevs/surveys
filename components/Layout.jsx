@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Row, Col, Toggle, Icon } from "rsuite";
 import dynamic from "next/dynamic";
 import Nav from "./Nav";
