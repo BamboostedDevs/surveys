@@ -92,11 +92,6 @@ export default function Create({ appContext }) {
     if (part + 1 === 2 || finish === true) {
       if (survey.title && survey.description && survey.form.length) {
         changePart(2);
-        console.log({
-          ...survey,
-          equation,
-          equationProps: count.map((val) => val.label),
-        });
         await Axios.post(
           "http://5b2fa7e471e3.ngrok.io/surveys/create",
           {
@@ -126,7 +121,6 @@ export default function Create({ appContext }) {
         );
       }
     } else if (preCount) {
-      console.log(survey);
       const nextCount = survey.form.map((val) => {
         if (val.count)
           return {

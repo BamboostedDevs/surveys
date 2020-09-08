@@ -19,7 +19,6 @@ export default function index({ appContext }) {
         .then((resp) => {
           if (resp.data) appContext.setSurveys(resp.data.reverse());
           else Alert.error("Błąd");
-          console.log(resp.data);
         })
         .catch((e) => {
           Alert.error("Błąd");
@@ -40,10 +39,8 @@ export default function index({ appContext }) {
               resp.data.map((val) => {
                 newAnswered[val.title] = val.answerTimestamp;
               });
-              console.log(newAnswered);
               setAnswered(newAnswered);
             } else Alert.error("Błąd");
-            console.log(resp.data);
           })
           .catch((e) => {
             Alert.error("Błąd");

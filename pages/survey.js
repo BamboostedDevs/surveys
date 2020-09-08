@@ -51,7 +51,6 @@ function Display({ appContext }) {
       email: email || appContext.email || undefined,
       inputs,
     };
-    console.log(payload, appContext.session || undefined);
     await Axios.post(
       "http://5b2fa7e471e3.ngrok.io/surveys/answer",
       payload,

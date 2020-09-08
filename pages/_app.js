@@ -17,7 +17,6 @@ function AppProvider({ Component, pageProps }) {
       setRole(parseJwt(session).role || 0);
       window.sessionStorage.setItem("session", session);
     }
-    console.log(_session, session, role);
   }, [session]);
 
   return (
