@@ -19,7 +19,7 @@ function confirmation({ appContext }) {
           if (resp.data && resp.data.created) {
             setResult(resp.data.equationResult || false);
             Alert.success("Potwierdzono ankietę!");
-            Alert.info("Przekierowanie za 5s");
+            Alert.info("Przekierowanie za 5s", 4900);
             setTimeout(() => router.push("/"), 5000);
           } else {
             Alert.error("Błąd");
@@ -37,7 +37,7 @@ function confirmation({ appContext }) {
     <Layout appContext={appContext} title="Potwierdź odpowiedź">
       <h1 style={{ marginTop: "10vh" }}>Dziękujemy!</h1>
       <h5 style={{ marginTop: "16px" }}>Ankieta została wysłana.</h5>
-      {reslut && (
+      {result && (
         <h5 style={{ marginTop: "8px" }}>Wynik twojego równania: {result}</h5>
       )}
     </Layout>

@@ -17,8 +17,10 @@ export default function index({ appContext }) {
         }
       )
         .then((resp) => {
-          if (resp.data) appContext.setSurveys(resp.data.reverse());
-          else Alert.error("Błąd");
+          if (resp.data) {
+            appContext.setSurveys(resp.data.reverse());
+            console.log(resp.data);
+          } else Alert.error("Błąd");
         })
         .catch((e) => {
           Alert.error("Błąd");
@@ -51,7 +53,9 @@ export default function index({ appContext }) {
   return (
     <Layout appContext={appContext} title="Lista ankiet">
       <div style={{ display: "flex", flexFlow: "column nowrap" }}>
-        <Title>Dostępne ankiety:</Title>
+        <Title>
+          {appContext.role === 1 ? "Pobierz odpowiedzi" : "Dostępne ankiety"}:
+        </Title>
         <Scroll>
           {appContext.surveys.map((val, idx) => (
             <SurveyListing

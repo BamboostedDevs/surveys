@@ -12,6 +12,7 @@ function _Nav({ className, session, setSession, role }) {
       setSession(false);
       Alert.info("Wylogowano");
       window.sessionStorage.removeItem("session");
+      window.sessionStorage.removeItem("role");
       window.location.reload(false);
     } else router.push("/login");
   };

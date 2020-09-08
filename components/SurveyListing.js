@@ -41,7 +41,7 @@ function SurveyListing({ val, idx, theme, sent, appContext }) {
             <div>Opis: </div>
             <div className="dimm">{val.description}</div>
           </div>
-          {sent && (
+          {sent ? (
             <div>
               <div className="title">wysłano</div>
               <div className="dimm">
@@ -50,6 +50,13 @@ function SurveyListing({ val, idx, theme, sent, appContext }) {
                   .fromNow()}
               </div>
             </div>
+          ) : val.answersCount ? (
+            <div>
+              <div className="title">Liczba odpowiedzi:</div>
+              <div className="dimm">{val.answersCount}</div>
+            </div>
+          ) : (
+            <></>
           )}
         </_SurveyListing>
       </Link>

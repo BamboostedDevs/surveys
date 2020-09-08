@@ -59,7 +59,7 @@ function Login({ callback, appContext, anonymous }) {
           Alert.success("Zalogowano");
           appContext.setEmail(email);
           appContext.setSession(resp.data.token);
-          callback && callback();
+          callback && callback(email, resp.data.token);
         } else {
           Alert.error("Błąd");
         }
@@ -72,7 +72,7 @@ function Login({ callback, appContext, anonymous }) {
   return (
     <>
       <Title>Login / Rejestracja</Title>
-      <Container anonymous={anonymous}>
+      <Container anonymous={anonymous} onSubmit={() => console.log("aaaa")}>
         <div>
           <MinorTitle>Email</MinorTitle>
           <Input

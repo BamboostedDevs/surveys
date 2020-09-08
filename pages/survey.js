@@ -41,7 +41,7 @@ function Display({ appContext }) {
     }
   };
 
-  const finish = async (email) => {
+  const finish = async (email, session) => {
     var inputs = {};
     state.form.map((val) => {
       if (val.answer) inputs[val.title] = val.answer;
@@ -51,17 +51,19 @@ function Display({ appContext }) {
       email: email || appContext.email || undefined,
       inputs,
     };
+    console.log(payload, appContext.session, session);
     await Axios.post(
       "http://7a55f9bc1d92.ngrok.io/surveys/answer",
       payload,
-      appContext.session && {
-        headers: { authorization: appContext.session },
+      (session || appContext.session) && {
+        headers: { authorization: session || appContext.session },
       }
     )
       .then((resp) => {
-        if (resp.data.created) {
+        if (resp.data) {
           Alert.success("Wysłano!");
-          Alert.info("Twój wynik to: " + resp.data.equationResult, 7000);
+          resp.data.equationResult &&
+            Alert.info("Twój wynik to: " + resp.data.equationResult, 7000);
         } else Alert.error("Błąd");
       })
       .catch((e) => Alert.error("Błąd"));
@@ -77,9 +79,9 @@ function Display({ appContext }) {
       {login ? (
         <Login
           appContext={appContext}
-          callback={() => {
+          callback={(email, session) => {
             setLogin(false);
-            finish();
+            finish(email, session);
           }}
           anonymous={(email) => {
             setLogin(false);

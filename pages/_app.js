@@ -12,9 +12,13 @@ function AppProvider({ Component, pageProps }) {
 
   useEffect(() => {
     const _session = window.sessionStorage.getItem("session");
+    const _role = window.sessionStorage.getItem("role");
     if (_session) setSession(_session);
+    if (_role) setRole(_role);
     if (session) {
-      setRole(parseJwt(session).role || 0);
+      const __role = parseJwt(session).role;
+      setRole(__role || 0);
+      window.sessionStorage.setItem("role", __role);
       window.sessionStorage.setItem("session", session);
     }
   }, [session]);
