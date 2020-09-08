@@ -52,7 +52,7 @@ function Display({ appContext }) {
       inputs,
     };
     await Axios.post(
-      "http://5b2fa7e471e3.ngrok.io/surveys/answer",
+      "http://7a55f9bc1d92.ngrok.io/surveys/answer",
       payload,
       appContext.session && {
         headers: { authorization: appContext.session },

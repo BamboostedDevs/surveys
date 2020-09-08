@@ -11,7 +11,7 @@ export default function index({ appContext }) {
   useEffect(() => {
     (async () => {
       await Axios.get(
-        "http://5b2fa7e471e3.ngrok.io/surveys/available",
+        "http://7a55f9bc1d92.ngrok.io/surveys/available",
         appContext.role && {
           headers: { authorization: appContext.session },
         }
@@ -30,7 +30,7 @@ export default function index({ appContext }) {
     appContext.session &&
       appContext.role !== 1 &&
       (async () => {
-        await Axios.get("http://5b2fa7e471e3.ngrok.io/surveys/answered", {
+        await Axios.get("http://7a55f9bc1d92.ngrok.io/surveys/answered", {
           headers: { authorization: appContext.session },
         })
           .then((resp) => {

@@ -74,7 +74,7 @@ export default function Create({ appContext }) {
       if (survey.title && survey.description && survey.form.length) {
         changePart(2);
         await Axios.post(
-          "http://5b2fa7e471e3.ngrok.io/surveys/create",
+          "http://7a55f9bc1d92.ngrok.io/surveys/create",
           {
             ...survey,
             equation,
