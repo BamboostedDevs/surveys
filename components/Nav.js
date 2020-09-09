@@ -14,6 +14,7 @@ function _Nav({ className, session, setSession, role }) {
       window.sessionStorage.removeItem("session");
       window.sessionStorage.removeItem("role");
       window.location.reload(false);
+      router.push("/");
     } else router.push("/login");
   };
 

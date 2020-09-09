@@ -52,7 +52,7 @@ function Display({ appContext }) {
       email: email || appContext.email || undefined,
       inputs,
     };
-    console.log(payload, appContext.session, session);
+    Alert.info("Wysłano");
     await Axios.post(
       apiBaseUrl + "/surveys/answer",
       payload,
@@ -62,7 +62,6 @@ function Display({ appContext }) {
     )
       .then((resp) => {
         if (resp.data) {
-          Alert.success("Wysłano!");
           resp.data.equationResult &&
             Alert.info("Twój wynik to: " + resp.data.equationResult, 7000);
         } else Alert.error("Błąd");

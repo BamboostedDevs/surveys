@@ -73,7 +73,11 @@ export default function Create({ appContext }) {
   const hanldeNext = async (finish) => {
     if (part + 1 === 2 || finish === true) {
       if (survey.title && survey.description && survey.form.length) {
-        changePart(2);
+        console.log({
+          ...survey,
+          equation,
+          equationProps: count.map((val) => val.label),
+        });
         await Axios.post(
           apiBaseUrl + "/surveys/create",
           {
@@ -86,10 +90,12 @@ export default function Create({ appContext }) {
           }
         )
           .then((resp) => {
+            changePart(2);
             Alert.success("Stworzono ankietę");
             setError(false);
           })
           .catch((e) => {
+            changePart(2);
             Alert.error("Błąd");
             setError(true);
           });

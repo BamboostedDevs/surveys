@@ -7,6 +7,8 @@ import {
   FormGroup,
   ControlLabel,
   TagPicker,
+  Toggle,
+  Icon,
 } from "rsuite";
 import Dropdown from "./Dropdown";
 import styled from "styled-components";
@@ -43,6 +45,11 @@ const Choice = ({ survey, idx, update, multiple }) => {
     payload.form.splice(idx, 1);
     update(payload);
   };
+  const calculate = (toggle) => {
+    var payload = { ...survey };
+    payload.form[idx].count = toggle;
+    update(payload);
+  };
   return (
     <FormGroup>
       <Dropdown
@@ -73,6 +80,18 @@ const Choice = ({ survey, idx, update, multiple }) => {
                 : []
             }
           />
+        </FormGroup>
+        <FormGroup>
+          <ControlLabel>
+            Dodać do kalkulacji?
+            <Toggle
+              onChange={(e) => calculate(e)}
+              checked={survey.form[idx].count || false}
+              style={{ marginLeft: "8px" }}
+              checkedChildren={<Icon icon="check" />}
+              unCheckedChildren={<Icon icon="close" />}
+            />
+          </ControlLabel>
         </FormGroup>
       </Dropdown>
       {multiple ? (

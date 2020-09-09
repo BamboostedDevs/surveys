@@ -105,6 +105,7 @@ function Login({ callback, appContext, anonymous }) {
                 ? { borderColor: "red" }
                 : undefined
             }
+            onPressEnter={handleLogin}
           />
         </div>
         <ButtonGroup justified>
