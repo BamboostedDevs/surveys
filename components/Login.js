@@ -3,7 +3,7 @@ import { useState } from "react";
 import Title, { MinorTitle } from "../components/Title";
 import { Button, ButtonGroup, Input, Tooltip, Whisper } from "rsuite";
 import styled from "styled-components";
-import { validateEmail } from "../utils";
+import { validateEmail, apiBaseUrl } from "../utils";
 import Axios from "axios";
 import { Alert } from "rsuite";
 
