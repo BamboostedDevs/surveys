@@ -24,7 +24,11 @@ function _Equation({ className, equation, setEquation, count }) {
       <h5>Formuła:</h5>
       <TreePicker
         defaultExpandAll
-        menuStyle={{ maxHeight: "37vh", overflowY: "auto" }}
+        menuStyle={{
+          maxHeight: "37vh",
+          overflowY: "auto",
+          maxWidth: window.innerWidth < 800 ? "70%" : "700px",
+        }}
         data={[
           { label: "Pola z ankiety", value: 0, children: count },
           {
@@ -41,7 +45,7 @@ function _Equation({ className, equation, setEquation, count }) {
           },
         ]}
         disabledItemValues={[0, 1]}
-        style={{ width: "100%" }}
+        style={{ width: "100%", position: "relative" }}
         onChange={handleInputConfirm}
         value={value}
         placeholder="Dodaj kafelek"
@@ -70,6 +74,8 @@ function _Equation({ className, equation, setEquation, count }) {
 
 const Equation = styled(_Equation)`
   > :nth-child(3) {
+    overflow-y: auto;
+    max-height: 35vh;
     margin: 8px 0 0 0px;
     padding-bottom: 8px;
     border-bottom: dashed currentColor 1px;
