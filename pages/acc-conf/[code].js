@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Layout from "../../components/Layout";
 import Axios from "axios";
 import { Alert } from "rsuite";
+import { apiBaseUrl } from "../../utils";
 
 function confirmation({ appContext }) {
   const router = useRouter();
@@ -11,9 +12,7 @@ function confirmation({ appContext }) {
 
   useEffect(() => {
     (async () => {
-      await Axios.get(
-        "http://7a55f9bc1d92.ngrok.io/users/confirm-signup/" + code
-      )
+      await Axios.get(apiBaseUrl + "/users/confirm-signup/" + code)
         .then((resp) => {
           if (resp.data && resp.data.token) {
             Alert.success("Potwierdzono konto!");

@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Layout from "../../components/Layout";
 import Axios from "axios";
 import { Alert } from "rsuite";
+import { apiBaseUrl } from "../../utils";
 
 function confirmation({ appContext }) {
   const router = useRouter();
@@ -12,9 +13,7 @@ function confirmation({ appContext }) {
 
   useEffect(() => {
     (async () => {
-      await Axios.get(
-        "http://7a55f9bc1d92.ngrok.io/surveys/confirm-answer/" + code
-      )
+      await Axios.get(apiBaseUrl + "/surveys/confirm-answer/" + code)
         .then((resp) => {
           if (resp.data && resp.data.created) {
             setResult(resp.data.equationResult || false);

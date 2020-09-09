@@ -10,6 +10,7 @@ import Description from "../components/CreateInputs/Description";
 import Scroll from "../components/Scroll";
 import Axios from "axios";
 import Equation from "../components/Equation";
+import { apiBaseUrl } from "../utils";
 
 const Add = styled.div`
   margin-bottom: 8px;
@@ -74,7 +75,7 @@ export default function Create({ appContext }) {
       if (survey.title && survey.description && survey.form.length) {
         changePart(2);
         await Axios.post(
-          "http://7a55f9bc1d92.ngrok.io/surveys/create",
+          apiBaseUrl + "/surveys/create",
           {
             ...survey,
             equation,

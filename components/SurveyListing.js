@@ -9,12 +9,9 @@ var fileDownload = require("js-file-download");
 function SurveyListing({ val, idx, theme, sent, appContext }) {
   const handleClick = async () => {
     appContext.role === 1 &&
-      (await Axios.get(
-        "http://7a55f9bc1d92.ngrok.io/surveys/answered-csv/" + val.id,
-        {
-          headers: { authorization: appContext.session },
-        }
-      )
+      (await Axios.get(apiBaseUrl + "/surveys/answered-csv/" + val.id, {
+        headers: { authorization: appContext.session },
+      })
         .then((resp) => {
           if (resp.data) {
             fileDownload(resp.data, (val.title || "survey") + ".csv");

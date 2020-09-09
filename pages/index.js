@@ -5,13 +5,14 @@ import SurveyListing from "../components/SurveyListing";
 import Scroll from "../components/Scroll";
 import Axios from "axios";
 import { Alert } from "rsuite";
+import { apiBaseUrl } from "../utils";
 
 export default function index({ appContext }) {
   const [answered, setAnswered] = useState({});
   useEffect(() => {
     (async () => {
       await Axios.get(
-        "http://7a55f9bc1d92.ngrok.io/surveys/available",
+        apiBaseUrl + "/surveys/available",
         appContext.role && {
           headers: { authorization: appContext.session },
         }
@@ -32,7 +33,7 @@ export default function index({ appContext }) {
     appContext.session &&
       appContext.role !== 1 &&
       (async () => {
-        await Axios.get("http://7a55f9bc1d92.ngrok.io/surveys/answered", {
+        await Axios.get(apiBaseUrl + "/surveys/answered", {
           headers: { authorization: appContext.session },
         })
           .then((resp) => {

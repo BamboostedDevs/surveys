@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { Alert } from "rsuite";
 import Login from "../components/Login";
 import Axios from "axios";
+import { apiBaseUrl } from "../utils";
 
 function useSurveyData(survey) {
   const [state, setState] = useState(survey);
@@ -53,7 +54,7 @@ function Display({ appContext }) {
     };
     console.log(payload, appContext.session, session);
     await Axios.post(
-      "http://7a55f9bc1d92.ngrok.io/surveys/answer",
+      apiBaseUrl + "/surveys/answer",
       payload,
       (session || appContext.session) && {
         headers: { authorization: session || appContext.session },
