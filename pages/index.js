@@ -20,7 +20,6 @@ export default function index({ appContext }) {
         .then((resp) => {
           if (resp.data) {
             appContext.setSurveys(resp.data.reverse());
-            console.log(resp.data);
           } else Alert.error("Błąd");
         })
         .catch((e) => {

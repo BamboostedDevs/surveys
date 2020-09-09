@@ -81,18 +81,20 @@ const Choice = ({ survey, idx, update, multiple }) => {
             }
           />
         </FormGroup>
-        <FormGroup>
-          <ControlLabel>
-            Dodać do kalkulacji?
-            <Toggle
-              onChange={(e) => calculate(e)}
-              checked={survey.form[idx].count || false}
-              style={{ marginLeft: "8px" }}
-              checkedChildren={<Icon icon="check" />}
-              unCheckedChildren={<Icon icon="close" />}
-            />
-          </ControlLabel>
-        </FormGroup>
+        {!multiple && (
+          <FormGroup>
+            <ControlLabel>
+              Dodać do kalkulacji?
+              <Toggle
+                onChange={(e) => calculate(e)}
+                checked={survey.form[idx].count || false}
+                style={{ marginLeft: "8px" }}
+                checkedChildren={<Icon icon="check" />}
+                unCheckedChildren={<Icon icon="close" />}
+              />
+            </ControlLabel>
+          </FormGroup>
+        )}
       </Dropdown>
       {multiple ? (
         <CheckboxGroup>

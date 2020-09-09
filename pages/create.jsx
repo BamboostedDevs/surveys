@@ -73,11 +73,6 @@ export default function Create({ appContext }) {
   const hanldeNext = async (finish) => {
     if (part + 1 === 2 || finish === true) {
       if (survey.title && survey.description && survey.form.length) {
-        console.log({
-          ...survey,
-          equation,
-          equationProps: count.map((val) => val.label),
-        });
         await Axios.post(
           apiBaseUrl + "/surveys/create",
           {

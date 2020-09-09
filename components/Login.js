@@ -72,7 +72,7 @@ function Login({ callback, appContext, anonymous }) {
   return (
     <>
       <Title>Login / Rejestracja</Title>
-      <Container anonymous={anonymous} onSubmit={() => console.log("aaaa")}>
+      <Container anonymous={anonymous}>
         <div>
           <MinorTitle>Email</MinorTitle>
           <Input
