@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import Nav from "./Nav";
 import styled from "styled-components";
 import Head from "next/head";
+import Footer from "./Footer";
 
 const _Layout = ({
   className,
@@ -60,6 +61,7 @@ const _Layout = ({
           {children}
         </Col>
         <Col xs={24} sm={12} md={8} lg={6} />
+        <Footer />
       </Row>
     </>
   );
@@ -67,7 +69,7 @@ const _Layout = ({
 
 const Layout = styled(_Layout)`
   position: absolute;
-  height: 100vh;
+  height: 110vh;
   width: 100vw;
   padding: 48px;
 

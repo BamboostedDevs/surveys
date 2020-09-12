@@ -63,7 +63,7 @@ function Display({ appContext }) {
       .then((resp) => {
         if (resp.data) {
           resp.data.equationResult &&
-            Alert.info("Twój wynik to: " + resp.data.equationResult, 7000);
+            Alert.info("Twój wynik: " + resp.data.equationResult, 7000);
         } else Alert.error("Błąd");
       })
       .catch((e) => Alert.error("Błąd"));

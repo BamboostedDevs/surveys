@@ -36,9 +36,7 @@ function confirmation({ appContext }) {
     <Layout appContext={appContext} title="Potwierdź odpowiedź">
       <h1 style={{ marginTop: "10vh" }}>Dziękujemy!</h1>
       <h5 style={{ marginTop: "16px" }}>Ankieta została wysłana.</h5>
-      {result && (
-        <h5 style={{ marginTop: "8px" }}>Wynik twojego równania: {result}</h5>
-      )}
+      {result && <h5 style={{ marginTop: "8px" }}>Twój wynik: {result}</h5>}
     </Layout>
   );
 }
