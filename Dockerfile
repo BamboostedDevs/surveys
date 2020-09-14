@@ -1,18 +1,25 @@
-FROM node:10
+FROM node:12
 
-# Setting working directory. All the path will be relative to WORKDIR
+ENV PORT 3000
+
+# Create app directory
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 # Installing dependencies
-COPY . .
+COPY package*.json /usr/src/app/
 RUN npm install
-RUN npm install -g serve
+
+# Copying source files
+COPY . /usr/src/app
 
 # Building app
-RUN npm run export
-
+RUN npm run build
 EXPOSE 3000
 
 # Running the app
-CMD [ "serve","-l","3000", "out" ]
+CMD "npm" "start"
+
+# USAGE:
+# docker build -t <username>/landing-page
+# docker run -p 3000:3000 <username>/landing-page:latest

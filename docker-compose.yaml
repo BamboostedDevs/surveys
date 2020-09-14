@@ -1,14 +1,13 @@
-version: "3"
+version: "3.3"
 
 services:
-  ccon_web:
+  nextjs:
+    ports:
+      - 3003:3003
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
-      - /usr/src/app/out
       - /usr/src/app/.next
-    ports:
-      - 3003:3000
